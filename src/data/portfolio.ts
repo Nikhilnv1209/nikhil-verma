@@ -18,6 +18,7 @@ export type Project = {
   tech: string[]
   highlights: string[]
   href: string
+  demo?: string
 }
 
 export type SkillGroup = {
@@ -96,7 +97,7 @@ export const projects: Project[] = [
   {
     title: 'AICommit',
     description:
-      'An AI-powered repository analysis and Q&A tool built on Next.js 15 and TypeScript. It indexes repository context with a RAG pipeline, uses Google Gemini to answer questions and produce retrieval-backed summaries, and can draft commit messages from the same analysis.',
+      'An AI-powered repository analysis and Q&A tool built on Next.js 15 and TypeScript. It indexes GitHub repositories, maps file and call dependencies, and uses a RAG pipeline with Google Gemini to answer questions, produce retrieval-backed summaries, and draft commit messages from the same analysis.',
     tech: [
       'Next.js 15',
       'TypeScript',
@@ -109,12 +110,14 @@ export const projects: Project[] = [
       'RAG',
     ],
     highlights: [
+      'Indexes GitHub repositories and maps file and call dependencies to ground every answer.',
       'RAG + LangChain pipeline over repository context for codebase Q&A and retrieval-backed summaries.',
       'Gemini-powered commit-message generation on top of the analysis layer.',
       'Queue-and-retry rate limiting for Gemini and GitHub APIs to prevent dropped requests.',
-      'AssemblyAI meeting transcription creates GitHub issues from action items; Stripe adds payments, with a Shadcn + Tailwind UI.',
+      'AssemblyAI meeting transcription creates GitHub issues from action items, with Stripe for payments.',
     ],
     href: 'https://github.com/Nikhilnv1209/AICommit',
+    demo: 'https://ai-commit.vercel.app',
   },
 ]
 

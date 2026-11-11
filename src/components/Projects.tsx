@@ -18,15 +18,28 @@ export function Projects() {
             <h3 className="font-serif text-2xl text-stone-900 dark:text-stone-100">
               {project.title}
             </h3>
-            <a
-              href={project.href}
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center gap-1.5 text-sm font-medium text-emerald-700 transition hover:text-emerald-600 dark:text-emerald-400 dark:hover:text-emerald-300"
-            >
-              GitHub
-              <ArrowUpRightIcon className="size-3.5" />
-            </a>
+            <div className="flex flex-wrap items-baseline gap-x-5 gap-y-1">
+              {project.demo ? (
+                <a
+                  href={project.demo}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-1.5 text-sm font-medium text-emerald-700 transition hover:text-emerald-600 dark:text-emerald-400 dark:hover:text-emerald-300"
+                >
+                  Live demo
+                  <ArrowUpRightIcon className="size-3.5" />
+                </a>
+              ) : null}
+              <a
+                href={project.href}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-1.5 text-sm font-medium text-stone-600 transition hover:text-stone-950 dark:text-stone-400 dark:hover:text-stone-100"
+              >
+                GitHub
+                <ArrowUpRightIcon className="size-3.5" />
+              </a>
+            </div>
           </div>
 
           <p className="mt-4 max-w-2xl text-base leading-7 text-stone-600 dark:text-stone-400">
