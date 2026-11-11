@@ -14,6 +14,7 @@ export type ExperienceItem = {
 
 export type Project = {
   title: string
+  label?: string
   description: string
   tech: string[]
   highlights: string[]
@@ -96,6 +97,7 @@ export const experience: ExperienceItem[] = [
 export const projects: Project[] = [
   {
     title: 'AICommit',
+    label: 'AI developer tool',
     description:
       'An AI-powered repository analysis and Q&A tool built on Next.js 15 and TypeScript. It indexes GitHub repositories, maps file and call dependencies, and uses a RAG pipeline with Google Gemini to answer questions, produce retrieval-backed summaries, and draft commit messages from the same analysis.',
     tech: [
@@ -118,6 +120,29 @@ export const projects: Project[] = [
     ],
     href: 'https://github.com/Nikhilnv1209/AICommit',
     demo: 'https://ai-commit.vercel.app',
+  },
+  {
+    title: 'ExpenseTracker',
+    label: 'Personal project · Privacy-first',
+    description:
+      'A privacy-first Android expense tracker I built for my own use: it parses bank and UPI SMS on-device, categorises my spending, and lets an AI assistant answer questions about my own transactions — all from local storage.',
+    tech: [
+      'Kotlin',
+      'Jetpack Compose',
+      'Material 3',
+      'Hilt',
+      'Room',
+      'WorkManager',
+      'AlarmManager',
+      'MVVM',
+    ],
+    highlights: [
+      'Local SMS import — one-tap import of bank/UPI messages already on the device, plus a manifest-declared receiver that parses new transactions as they arrive, even when the app is closed.',
+      'On-device analysis — transactions, categories, and spending summaries are computed from a local Room database. No account, no server, no sync.',
+      'Built-in finance agent — chat over my own data, with tool calls for spending summaries, category breakdowns, recategorising, and cleaning up bad entries.',
+      'A tool I actually use — signed release build on my own phone, with Material 3 and Compose, exact-alarm payment reminders, daily spend summaries, and interactive trend and category charts.',
+    ],
+    href: 'https://github.com/Nikhilnv1209/ExpenseTracker',
   },
 ]
 
