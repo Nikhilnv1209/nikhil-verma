@@ -2,6 +2,8 @@
 
 Personal portfolio website for Nikhil Verma.
 
+**Live:** https://nikhil-verma-in.vercel.app
+
 ## Stack
 
 - Vite 8
