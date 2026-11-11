@@ -4,7 +4,35 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>scaffold</title>
+    <meta
+      name="description"
+      content="Nikhil Verma is a Software Development Engineer at qikfox building native AI interfaces for Linux, Android releases on Chromium, and full-stack developer tools."
+    />
+    <meta name="author" content="Nikhil Verma" />
+    <meta name="theme-color" content="#fafaf9" />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:title"
+      content="Nikhil Verma — Software Development Engineer"
+    />
+    <meta
+      property="og:description"
+      content="Software Development Engineer at qikfox. Native AI interfaces for Linux, Android releases on Chromium, and full-stack developer tools."
+    />
+    <title>Nikhil Verma — Software Development Engineer</title>
+    <script>
+      ;(function () {
+        try {
+          var stored = localStorage.getItem('theme')
+          var dark = stored
+            ? stored === 'dark'
+            : window.matchMedia('(prefers-color-scheme: dark)').matches
+          document.documentElement.classList.toggle('dark', dark)
+        } catch (error) {
+          // localStorage can be unavailable in restricted browser modes.
+        }
+      })()
+    </script>
   </head>
   <body>
     <div id="root"></div>
