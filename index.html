@@ -32,6 +32,16 @@
             ? stored === 'dark'
             : window.matchMedia('(prefers-color-scheme: dark)').matches
           document.documentElement.classList.toggle('dark', dark)
+
+          var hour = new Date().getHours()
+          var banner = hour >= 6 && hour < 18 ? '/banner-day.webp' : '/banner-night.webp'
+
+          var preload = document.createElement('link')
+          preload.rel = 'preload'
+          preload.as = 'image'
+          preload.href = banner
+          preload.fetchPriority = 'high'
+          document.head.appendChild(preload)
         } catch (error) {
           // localStorage can be unavailable in restricted browser modes.
         }

@@ -1,5 +1,4 @@
-import bannerDay from '../assets/banner-light.jpg?url'
-import bannerNight from '../assets/banner-dark.jpg?url'
+import { useState } from 'react'
 import { useTimeOfDay } from '../hooks/useTimeOfDay'
 import { Clock } from './Clock'
 import { Petals } from './Petals'
@@ -7,16 +6,23 @@ import { Petals } from './Petals'
 export function HeroBanner() {
   const timeOfDay = useTimeOfDay()
   const isDay = timeOfDay === 'day'
+  const src = isDay ? '/banner-day.webp' : '/banner-night.webp'
+
+  const [loadedSrc, setLoadedSrc] = useState<string | null>(null)
+  const loaded = loadedSrc === src
 
   return (
     <div id="top" className="relative">
-      <div className="relative aspect-[21/9] w-full overflow-hidden sm:aspect-[4/1]">
+      <div className="relative aspect-[21/9] w-full overflow-hidden bg-[#0b1416] sm:aspect-[4/1]">
         <img
-          src={isDay ? bannerDay : bannerNight}
+          src={src}
           alt=""
-          className={`absolute inset-0 h-full w-full object-cover ${
-            isDay ? 'object-[50%_55%]' : 'object-[50%_30%]'
-          }`}
+          fetchPriority="high"
+          decoding="async"
+          onLoad={() => setLoadedSrc(src)}
+          className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ease-out ${
+            loaded ? 'opacity-100' : 'opacity-0'
+          } ${isDay ? 'object-[50%_55%]' : 'object-[50%_30%]'}`}
         />
 
         <Petals />
