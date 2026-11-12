@@ -44,7 +44,7 @@ export function ThemeToggle() {
       type="button"
       onClick={toggleTheme}
       aria-label={`Switch to ${isDark ? 'light' : 'dark'} theme`}
-      className="grid size-9 place-items-center rounded-md text-stone-500 transition hover:bg-stone-200/60 hover:text-stone-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600 dark:text-stone-400 dark:hover:bg-stone-800/60 dark:hover:text-stone-100"
+      className="grid size-10 place-items-center rounded-xl border border-stone-200 text-stone-600 transition hover:border-stone-300 hover:bg-stone-100 hover:text-stone-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600 dark:border-stone-800 dark:text-slate-400 dark:hover:border-stone-700 dark:hover:bg-stone-800/60 dark:hover:text-white"
     >
       {isDark ? <SunIcon className="size-4" /> : <MoonIcon className="size-4" />}
     </button>

@@ -32,6 +32,75 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+@keyframes dropdown-in {
+  from {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes dropdown-item-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+html.cursor-custom,
+html.cursor-custom * {
+  cursor: none;
+}
+
+html.cursor-custom input,
+html.cursor-custom textarea {
+  cursor: text;
+}
+
+.cursor-dot {
+  --x: 50vw;
+  --y: 50vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 200;
+  width: 0;
+  height: 0;
+  transform: translate3d(var(--x), var(--y), 0) translate(-50%, -50%);
+  transition: opacity 160ms ease;
+  pointer-events: none;
+}
+
+.cursor-dot-core {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 9px;
+  height: 9px;
+  margin: -4.5px 0 0 -4.5px;
+  border-radius: 9999px;
+  background-color: var(--color-emerald-500);
+  box-shadow: 0 0 0 4px
+    color-mix(in oklab, var(--color-emerald-500) 18%, transparent);
+  transform: scale(var(--scale, 1));
+  transition: transform 160ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.cursor-dot[data-hover='true'] .cursor-dot-core {
+  --scale: 1.9;
+}
+
+.cursor-dot[data-hidden='true'] {
+  opacity: 0;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

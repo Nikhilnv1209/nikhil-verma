@@ -1,13 +1,15 @@
 import avatar from '../assets/avatar.svg?url'
 import { profile } from '../data/portfolio'
 import {
-  ArrowUpRightIcon,
   ChatIcon,
+  DocumentIcon,
   GitHubIcon,
   LinkedInIcon,
   MailIcon,
 } from './Icons'
+import { Menu } from './Menu'
 import { StackIcons } from './StackIcons'
+import { ThemeToggle } from './ThemeToggle'
 
 const stats = [
   { value: '283', label: 'contributions in the past year' },
@@ -18,40 +20,43 @@ const stats = [
 const socials = [
   { label: 'GitHub', href: profile.github, icon: GitHubIcon },
   { label: 'LinkedIn', href: profile.linkedin, icon: LinkedInIcon },
-  {
-    label: 'Portfolio',
-    href: 'https://nikhil-verma-in.vercel.app',
-    icon: ArrowUpRightIcon,
-  },
+  { label: 'Résumé', href: '/resume.pdf', icon: DocumentIcon },
 ]
 
 export function Hero() {
   return (
     <section className="border-b border-stone-200 dark:border-stone-800">
       <div className="mx-auto max-w-5xl px-6 pb-16 pt-10 sm:pt-14">
-        <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:gap-6">
-          <img
-            src={avatar}
-            alt=""
-            className="size-24 shrink-0 rounded-2xl border border-stone-200 shadow-sm dark:border-stone-800"
-          />
-          <div>
-            <h1 className="font-serif text-4xl font-normal tracking-tight text-stone-900 sm:text-5xl dark:text-stone-100">
-              Nikhil Verma
-            </h1>
-            <p className="mt-1.5 text-base text-stone-600 dark:text-stone-400">
-              Software Development Engineer at qikfox · Noida, India
-            </p>
-            <ul className="mt-3 flex flex-wrap gap-x-5 gap-y-1 font-mono text-xs text-stone-500 dark:text-stone-400">
-              {stats.map((stat) => (
-                <li key={stat.label}>
-                  <span className="text-stone-900 dark:text-stone-100">
-                    {stat.value}
-                  </span>{' '}
-                  {stat.label}
-                </li>
-              ))}
-            </ul>
+        <div className="flex items-start justify-between gap-4">
+          <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:gap-6">
+            <img
+              src={avatar}
+              alt=""
+              className="size-24 shrink-0 rounded-2xl border border-stone-200 shadow-sm dark:border-stone-800"
+            />
+            <div>
+              <h1 className="font-serif text-4xl font-normal tracking-tight text-stone-900 sm:text-5xl dark:text-stone-100">
+                Nikhil Verma
+              </h1>
+              <p className="mt-1.5 text-base text-stone-600 dark:text-stone-400">
+                Software Development Engineer at qikfox · Noida, India
+              </p>
+              <ul className="mt-3 flex flex-wrap gap-x-5 gap-y-1 font-mono text-xs text-stone-500 dark:text-stone-400">
+                {stats.map((stat) => (
+                  <li key={stat.label}>
+                    <span className="text-stone-900 dark:text-stone-100">
+                      {stat.value}
+                    </span>{' '}
+                    {stat.label}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          <div className="flex shrink-0 items-center gap-2">
+            <Menu />
+            <ThemeToggle />
           </div>
         </div>
 
@@ -75,6 +80,11 @@ export function Hero() {
             .
           </li>
         </ul>
+
+        <p className="mt-7 max-w-xl font-serif text-xl leading-snug tracking-tight text-stone-700 dark:text-stone-300">
+          “I care about clean systems, reliable releases, and developer
+          experience.”
+        </p>
 
         <div className="mt-7 flex flex-wrap gap-3">
           <a
