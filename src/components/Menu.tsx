@@ -53,7 +53,7 @@ export function Menu() {
         aria-expanded={open}
         aria-controls="section-menu"
         aria-label={open ? 'Close navigation' : 'Open navigation'}
-        className="relative grid size-10 place-items-center rounded-xl border border-stone-200 text-stone-600 transition hover:border-stone-300 hover:bg-stone-100 hover:text-stone-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600 dark:border-stone-800 dark:text-slate-400 dark:hover:border-stone-700 dark:hover:bg-stone-800/60 dark:hover:text-white"
+        className="relative grid size-10 place-items-center rounded-xl border border-stone-200 text-stone-600 transition hover:border-stone-300 hover:bg-stone-100 hover:text-stone-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600 dark:border-stone-800 dark:text-stone-400 dark:hover:border-stone-700 dark:hover:bg-stone-800/60 dark:hover:text-white"
       >
         <GridDotsIcon
           className={`absolute size-4 transition-all duration-200 ${
@@ -89,7 +89,7 @@ export function Menu() {
                 <a
                   href={item.href}
                   onClick={() => setOpen(false)}
-                  className="group flex items-center justify-between gap-3 rounded-xl px-3 py-2 text-[15px] font-medium text-stone-700 transition hover:bg-stone-100 hover:text-stone-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600 dark:text-slate-200 dark:hover:bg-stone-800 dark:hover:text-white"
+                  className="group flex items-center justify-between gap-3 rounded-xl px-3 py-2 text-[15px] font-medium text-stone-700 transition hover:bg-stone-100 hover:text-stone-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600 dark:text-stone-200 dark:hover:bg-stone-800 dark:hover:text-white"
                 >
                   <span className="flex items-baseline gap-3">
                     <span className="font-mono text-[10px] font-normal text-stone-400 dark:text-stone-500">

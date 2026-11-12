@@ -96,7 +96,7 @@ export function Hero() {
           </a>
           <a
             href={`mailto:${profile.email}`}
-            className="inline-flex items-center gap-2 rounded-xl border border-stone-300 px-4 py-2.5 text-sm font-semibold text-stone-700 transition hover:border-stone-400 hover:bg-stone-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600 dark:border-stone-700 dark:text-slate-200 dark:hover:bg-stone-800/60"
+            className="inline-flex items-center gap-2 rounded-xl border border-stone-300 px-4 py-2.5 text-sm font-semibold text-stone-700 transition hover:border-stone-400 hover:bg-stone-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600 dark:border-stone-700 dark:text-stone-200 dark:hover:bg-stone-800/60"
           >
             <MailIcon className="size-4" />
             Email me
@@ -113,7 +113,7 @@ export function Hero() {
               href={href}
               target={href.startsWith('mailto:') ? undefined : '_blank'}
               rel="noreferrer"
-              className="inline-flex items-center gap-2 rounded-lg border border-stone-200 px-3 py-1.5 text-sm font-medium text-stone-600 transition hover:border-stone-300 hover:text-stone-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600 dark:border-stone-800 dark:text-slate-300 dark:hover:border-stone-700 dark:hover:text-white"
+              className="inline-flex items-center gap-2 rounded-lg border border-stone-200 px-3 py-1.5 text-sm font-medium text-stone-600 transition hover:border-stone-300 hover:text-stone-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600 dark:border-stone-800 dark:text-stone-300 dark:hover:border-stone-700 dark:hover:text-white"
             >
               <Icon className="size-4" />
               {label}

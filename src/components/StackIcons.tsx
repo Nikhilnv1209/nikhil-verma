@@ -22,7 +22,7 @@ export function StackIcons() {
         <li key={item.slug}>
           <span
             title={item.name}
-            className="grid size-11 place-items-center rounded-xl shadow-sm ring-1 ring-black/5 transition hover:-translate-y-0.5 dark:ring-white/10"
+            className="grid size-11 place-items-center rounded-xl shadow-sm ring-1 ring-black/5 transition hover:-transtone-y-0.5 dark:ring-white/10"
             style={{ backgroundColor: item.color }}
           >
             <img

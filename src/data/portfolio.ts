@@ -8,6 +8,9 @@ export type ExperienceItem = {
   note?: string
   role: string
   period: string
+  type: string
+  location?: string
+  mark: string
   tech: string[]
   highlights: string[]
 }
@@ -59,14 +62,17 @@ export const experience: ExperienceItem[] = [
     note: 'Methodworks Pvt. Ltd. — India payroll',
     role: 'Software Development Engineer',
     period: 'Jul 2024 – Present',
+    type: 'Full-time',
+    location: 'Noida, India',
+    mark: 'Q',
     tech: ['C', 'Rust', 'JavaScript', 'Chromium', 'Android', 'tree-sitter'],
     highlights: [
-      'Own Android releases: rebase on upstream Chromium for desktop parity and ship 5+ major Android versions.',
-      'Run release cycles end to end — builds, rollout, stability fixes, regressions, and version-gated features.',
-      'Build a codebase-analysis product with tree-sitter parsing, deterministic grouping, and a team knowledge graph.',
-      'Built remote compute instances on E2B, provisioned per account and isolated per owner.',
-      'Shipped ownership and invite flows, billing with a wallet ledger, audit rails, and multi-agent collaboration.',
-      'Led 4-person teams across projects — giving guidance, unblocking work, and carrying deliverables through to live production.',
+      'Own **Android releases**: rebase on upstream Chromium for desktop parity and ship **5+ major versions**.',
+      'Run release cycles end to end — builds, rollout, **stability fixes**, and version-gated features.',
+      'Build a **codebase-analysis product** with tree-sitter parsing, deterministic grouping, and a team knowledge graph.',
+      'Built **remote compute instances on E2B**, provisioned per account and isolated per owner.',
+      'Shipped **ownership and invite flows**, **billing with a wallet ledger**, **audit rails**, and multi-agent collaboration.',
+      '**Led 4-person teams** across projects — giving guidance, unblocking work, and carrying deliverables through to live production.',
     ],
   },
   {
@@ -74,22 +80,27 @@ export const experience: ExperienceItem[] = [
     note: 'Methodworks Pvt. Ltd. — India payroll',
     role: 'Associate Software Developer Engineer',
     period: 'Jul 2023 – Jul 2024',
+    type: 'Full-time',
+    location: 'Noida, India',
+    mark: 'Q',
     tech: ['Go', 'Python', 'Linux', 'MCP', 'AI Agents'],
     highlights: [
-      'Turned a Linux OS into a native AI conversational interface with an MCP server over stdio and an Electron client.',
-      'Routed agentic tool calls for commands, apps, and files through audited MCP calls instead of raw shell access.',
-      'Added prompt-injection guardrails: input/output validation, deny-listed calls, and confirmation before irreversible actions.',
-      'Supported local and remote model backends and packaged the system as a Debian ISO.',
+      'Turned a **Linux OS into a native AI conversational interface** with an MCP server over stdio and an Electron client.',
+      'Routed **agentic tool calls** for commands, apps, and files through audited MCP calls instead of raw shell access.',
+      'Added **prompt-injection guardrails**: input/output validation, deny-listed calls, and confirmation before irreversible actions.',
+      'Supported **local and remote model backends**, packaged as a **Debian ISO**.',
     ],
   },
   {
     company: 'Kartexa',
     role: 'Frontend Developer Intern',
     period: 'May 2023 – Jul 2023',
+    type: 'Internship',
+    mark: 'K',
     tech: ['React.js', 'TailwindCSS', 'Node.js'],
     highlights: [
-      'Built reusable, responsive components with React and Tailwind CSS.',
-      'Collaborated with backend engineers to integrate APIs smoothly and optimize usage.',
+      'Built **reusable, responsive components** with React and Tailwind CSS.',
+      'Collaborated with backend engineers to **integrate APIs smoothly** and optimize usage.',
     ],
   },
 ]

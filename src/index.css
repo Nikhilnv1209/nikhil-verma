@@ -10,15 +10,28 @@
   --font-mono:
     ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono',
     'Courier New', monospace;
+
+  /* Deep Teal — neutral ramp */
+  --color-stone-50: #edf3f1;
+  --color-stone-100: #e3ecea;
+  --color-stone-200: #cddcd9;
+  --color-stone-300: #a7bfbb;
+  --color-stone-400: #7b9894;
+  --color-stone-500: #5c7a76;
+  --color-stone-600: #455d5a;
+  --color-stone-700: #374a47;
+  --color-stone-800: #1b2926;
+  --color-stone-900: #12201e;
+  --color-stone-950: #0b1416;
 }
 
 html {
-  background-color: #fafaf9;
+  background-color: #edf3f1;
   scroll-behavior: smooth;
 }
 
 html.dark {
-  background-color: #0c0a09;
+  background-color: #0b1416;
   color-scheme: dark;
 }
 
