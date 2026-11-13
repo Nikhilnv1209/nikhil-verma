@@ -16,9 +16,14 @@ export type ExperienceItem = {
 }
 
 export type Project = {
+  slug: string
   title: string
   label?: string
+  summary: string
   description: string
+  image?: string
+  phones?: string[]
+  gallery?: string[]
   tech: string[]
   highlights: string[]
   href: string
@@ -107,10 +112,14 @@ export const experience: ExperienceItem[] = [
 
 export const projects: Project[] = [
   {
+    slug: 'aicommit',
     title: 'AICommit',
     label: 'AI developer tool',
+    summary: 'Repository analysis and Q&A with RAG over your codebase.',
     description:
       'An AI-powered repository analysis and Q&A tool built on Next.js 15 and TypeScript. It indexes GitHub repositories, maps file and call dependencies, and uses a RAG pipeline with Google Gemini to answer questions, produce retrieval-backed summaries, and draft commit messages from the same analysis.',
+    image: '/projects/aicommit.webp',
+    gallery: ['/projects/aicommit-product.webp'],
     tech: [
       'Next.js 15',
       'TypeScript',
@@ -133,10 +142,17 @@ export const projects: Project[] = [
     demo: 'https://ai-commit.vercel.app',
   },
   {
+    slug: 'expensetracker',
     title: 'ExpenseTracker',
     label: 'Personal project · Privacy-first',
+    summary: 'A privacy-first Android tracker with a local finance agent.',
     description:
       'A privacy-first Android expense tracker I built for my own use: it parses bank and UPI SMS on-device, categorises my spending, and lets an AI assistant answer questions about my own transactions — all from local storage.',
+    image: '/projects/expensetracker-home.webp',
+    phones: [
+      '/projects/expensetracker-home.webp',
+      '/projects/expensetracker-settings.webp',
+    ],
     tech: [
       'Kotlin',
       'Jetpack Compose',

@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { navItems, profile } from '../data/portfolio'
+import { Link } from '../lib/router'
 import {
   ArrowUpRightIcon,
   CrossIcon,
@@ -86,8 +87,8 @@ export function Menu() {
                   animationDelay: `${40 + index * 25}ms`,
                 }}
               >
-                <a
-                  href={item.href}
+                <Link
+                  to={`/${item.href}`}
                   onClick={() => setOpen(false)}
                   className="group flex items-center justify-between gap-3 rounded-xl px-3 py-2 text-[15px] font-medium text-stone-700 transition hover:bg-stone-100 hover:text-stone-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600 dark:text-stone-200 dark:hover:bg-stone-800 dark:hover:text-white"
                 >
@@ -98,7 +99,7 @@ export function Menu() {
                     {item.label}
                   </span>
                   <ArrowUpRightIcon className="size-3.5 shrink-0 text-stone-300 opacity-0 transition group-hover:opacity-100 dark:text-stone-600" />
-                </a>
+                </Link>
               </li>
             ))}
           </ul>
