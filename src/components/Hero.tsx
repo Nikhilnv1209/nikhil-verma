@@ -1,4 +1,3 @@
-import avatar from '../assets/avatar.svg?url'
 import { profile } from '../data/portfolio'
 import {
   ChatIcon,
@@ -8,6 +7,7 @@ import {
   MailIcon,
 } from './Icons'
 import { Menu } from './Menu'
+import { Portrait } from './Portrait'
 import { StackIcons } from './StackIcons'
 import { ThemeToggle } from './ThemeToggle'
 
@@ -29,11 +29,7 @@ export function Hero() {
       <div className="mx-auto max-w-5xl px-6 pb-16 pt-10 sm:pt-14">
         <div className="flex items-start justify-between gap-4">
           <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:gap-6">
-            <img
-              src={avatar}
-              alt=""
-              className="size-24 shrink-0 rounded-2xl border border-stone-200 shadow-sm dark:border-stone-800"
-            />
+            <Portrait />
             <div>
               <h1 className="font-serif text-4xl font-normal tracking-tight text-stone-900 sm:text-5xl dark:text-stone-100">
                 Nikhil Verma
