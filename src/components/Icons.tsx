@@ -140,8 +140,87 @@ export function MoonIcon({ className = 'size-5' }: IconProps) {
   )
 }
 
-export function MenuIcon({ className = 'size-5' }: IconProps) {
+export function ChevronIcon({ className = 'size-5' }: IconProps) {
   return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <path d="m18 15-6-6-6 6" />
+    </svg>
+  )
+}
+
+export function DocumentIcon({ className = 'size-5' }: IconProps) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" />
+      <path d="M14 2v5h5" />
+      <path d="M9 13h6M9 17h6" />
+    </svg>
+  )
+}
+
+export function GridDotsIcon({ className = 'size-5' }: IconProps) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <rect x="5" y="5" width="5" height="5" rx="1.5" />
+      <rect x="14" y="5" width="5" height="5" rx="1.5" />
+      <rect x="5" y="14" width="5" height="5" rx="1.5" />
+      <rect x="14" y="14" width="5" height="5" rx="1.5" />
+    </svg>
+  )
+}
+
+export function CrossIcon({ className = 'size-5' }: IconProps) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      aria-hidden="true"
+    >
+      <path d="M6 6l12 12M18 6L6 18" />
+    </svg>
+  )
+}
+
+export function ChatIcon({ className = 'size-5' }: IconProps) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5Z" />
+    </svg>
+  )
+}
+
+export function MenuIcon({ className = 'size-5' }: IconProps) {  return (
     <svg
       className={className}
       viewBox="0 0 24 24"

@@ -9,7 +9,7 @@
       content="Nikhil Verma is a Software Development Engineer at qikfox building native AI interfaces for Linux, Android releases on Chromium, and full-stack developer tools."
     />
     <meta name="author" content="Nikhil Verma" />
-    <meta name="theme-color" content="#fafaf9" />
+    <meta name="theme-color" content="#edf3f1" />
     <meta property="og:type" content="website" />
     <meta
       property="og:title"
@@ -32,6 +32,16 @@
             ? stored === 'dark'
             : window.matchMedia('(prefers-color-scheme: dark)').matches
           document.documentElement.classList.toggle('dark', dark)
+
+          var hour = new Date().getHours()
+          var banner = hour >= 6 && hour < 18 ? '/banner-day.webp' : '/banner-night.webp'
+
+          var preload = document.createElement('link')
+          preload.rel = 'preload'
+          preload.as = 'image'
+          preload.href = banner
+          preload.fetchPriority = 'high'
+          document.head.appendChild(preload)
         } catch (error) {
           // localStorage can be unavailable in restricted browser modes.
         }
