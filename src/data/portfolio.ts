@@ -46,7 +46,7 @@ export const profile = {
   name: 'Nikhil Verma',
   role: 'Software Development Engineer',
   tagline:
-    'I build native AI interfaces for Linux, Android releases on Chromium, and full-stack developer tools — from architecture to rollout.',
+    'I build native AI interfaces for Linux, ship Android releases on Chromium, and develop full-stack tools — from architecture to rollout.',
   location: 'Noida, India',
   email: 'nikhilverma5000.nv@gmail.com',
   github: 'https://github.com/Nikhilnv1209',
@@ -73,7 +73,7 @@ export const experience: ExperienceItem[] = [
     tech: ['C', 'Rust', 'JavaScript', 'Chromium', 'Android', 'tree-sitter'],
     highlights: [
       'Own **Android releases**: rebase on upstream Chromium for desktop parity and ship **5+ major versions**.',
-      'Run release cycles end to end — builds, rollout, **stability fixes**, and version-gated features.',
+      'Run release cycles end to end — builds, rollouts, **stability fixes**, and version-gated features.',
       'Build a **codebase-analysis product** with tree-sitter parsing, deterministic grouping, and a team knowledge graph.',
       'Built **remote compute instances on E2B**, provisioned per account and isolated per owner.',
       'Shipped **ownership and invite flows**, **billing with a wallet ledger**, **audit rails**, and multi-agent collaboration.',
@@ -102,10 +102,10 @@ export const experience: ExperienceItem[] = [
     period: 'May 2023 – Jul 2023',
     type: 'Internship',
     mark: 'K',
-    tech: ['React.js', 'TailwindCSS', 'Node.js'],
+    tech: ['React', 'Tailwind CSS', 'Node.js'],
     highlights: [
       'Built **reusable, responsive components** with React and Tailwind CSS.',
-      'Collaborated with backend engineers to **integrate APIs smoothly** and optimize usage.',
+      'Collaborated with backend engineers to **integrate APIs smoothly** and optimize API usage.',
     ],
   },
 ]
@@ -133,10 +133,10 @@ export const projects: Project[] = [
     ],
     highlights: [
       'Indexes GitHub repositories and maps file and call dependencies to ground every answer.',
-      'RAG + LangChain pipeline over repository context for codebase Q&A and retrieval-backed summaries.',
-      'Gemini-powered commit-message generation on top of the analysis layer.',
-      'Queue-and-retry rate limiting for Gemini and GitHub APIs to prevent dropped requests.',
-      'AssemblyAI meeting transcription creates GitHub issues from action items, with Stripe for payments.',
+      'Runs a RAG + LangChain pipeline over repository context for codebase Q&A and retrieval-backed summaries.',
+      'Generates commit messages with Gemini on top of the analysis layer.',
+      'Rate-limits Gemini and GitHub calls with a queue and retry policy to prevent dropped requests.',
+      'Turns AssemblyAI meeting transcripts into GitHub issues, with Stripe handling payments.',
     ],
     href: 'https://github.com/Nikhilnv1209/AICommit',
     demo: 'https://ai-commit.vercel.app',
@@ -147,7 +147,7 @@ export const projects: Project[] = [
     label: 'Personal project · Privacy-first',
     summary: 'A privacy-first Android tracker with a local finance agent.',
     description:
-      'A privacy-first Android expense tracker I built for my own use: it parses bank and UPI SMS on-device, categorises my spending, and lets an AI assistant answer questions about my own transactions — all from local storage.',
+      'A privacy-first Android expense tracker I built for my own use: it parses bank and UPI SMS on device, categorizes my spending, and lets an AI assistant answer questions about my own transactions — entirely from local storage.',
     image: '/projects/expensetracker-home.webp',
     phones: [
       '/projects/expensetracker-home.webp',
@@ -166,7 +166,7 @@ export const projects: Project[] = [
     highlights: [
       'Local SMS import — one-tap import of bank/UPI messages already on the device, plus a manifest-declared receiver that parses new transactions as they arrive, even when the app is closed.',
       'On-device analysis — transactions, categories, and spending summaries are computed from a local Room database. No account, no server, no sync.',
-      'Built-in finance agent — chat over my own data, with tool calls for spending summaries, category breakdowns, recategorising, and cleaning up bad entries.',
+      'Built-in finance agent — chat over my own data, with tool calls for spending summaries, category breakdowns, recategorizing, and cleaning up bad entries.',
       'A tool I actually use — signed release build on my own phone, with Material 3 and Compose, exact-alarm payment reminders, daily spend summaries, and interactive trend and category charts.',
     ],
     href: 'https://github.com/Nikhilnv1209/ExpenseTracker',

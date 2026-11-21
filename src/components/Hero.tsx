@@ -30,7 +30,7 @@ export function Hero() {
         contributions === null ? FALLBACK_CONTRIBUTIONS : String(contributions),
       label: 'contributions in the past year',
     },
-    { value: '5+', label: 'Android major releases' },
+    { value: '5+', label: 'major Android releases' },
     { value: '3+', label: 'years shipping software' },
   ]
 
@@ -72,14 +72,14 @@ export function Hero() {
             <span className="font-semibold text-stone-900 dark:text-stone-100">
               native AI interfaces for Linux
             </span>{' '}
-            and agent tooling with audited MCP calls.
+            and agent tooling backed by audited MCP calls.
           </li>
           <li>
-            Currently owning{' '}
+            I currently own{' '}
             <span className="font-semibold text-stone-900 dark:text-stone-100">
-              Android releases on Chromium
+              Android releases built on Chromium
             </span>{' '}
-            and shipping{' '}
+            and ship{' '}
             <span className="font-semibold text-stone-900 dark:text-stone-100">
               full-stack developer tools
             </span>
@@ -110,7 +110,7 @@ export function Hero() {
         </div>
 
         <p className="mt-10 text-sm text-stone-500 dark:text-stone-400">
-          Here are my socials and work
+          Find me online
         </p>
         <div className="mt-3 flex flex-wrap gap-2">
           {socials.map(({ label, href, icon: Icon }) => (
