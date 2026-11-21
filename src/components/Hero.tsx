@@ -13,7 +13,7 @@ import { StackIcons } from './StackIcons'
 import { ThemeToggle } from './ThemeToggle'
 
 // Used only until the live count arrives, or if the stats endpoint is down.
-const FALLBACK_CONTRIBUTIONS = '292'
+const FALLBACK_CONTRIBUTIONS = '295'
 
 const socials = [
   { label: 'GitHub', href: profile.github, icon: GitHubIcon },

@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react'
 import { defineConfig, type Plugin } from 'vite'
 
 const CONTRIBUTIONS_URL =
-  'https://github-contributions-api.jogruber.de/v4/Nikhilnv1209?y=last'
+  'https://github.com/users/Nikhilnv1209/contributions'
 const CONTRIBUTIONS_TTL = 60 * 60 * 1000
 
 /* Mirrors api/visits.ts and api/contributions.ts so `npm run dev` exercises the
@@ -36,17 +36,26 @@ function devStats(): Plugin {
           return send({ total: contributions.total })
         }
 
-        fetch(CONTRIBUTIONS_URL, { signal: AbortSignal.timeout(5000) })
-          .then((upstream) => (upstream.ok ? upstream.json() : null))
-          .then((payload) => {
-            const total = (payload as { total?: { lastYear?: number } } | null)
-              ?.total?.lastYear
+        fetch(CONTRIBUTIONS_URL, {
+          headers: { 'User-Agent': 'nikhil-verma-portfolio-dev' },
+          signal: AbortSignal.timeout(8000),
+        })
+          .then((upstream) => (upstream.ok ? upstream.text() : null))
+          .then((html) => {
+            if (!html) return send({ total: null })
 
-            if (typeof total === 'number') {
-              contributions = { total, at: Date.now() }
+            let total = 0
+            let days = 0
+
+            for (const match of html.matchAll(/(\d+) contributions? on /g)) {
+              total += Number(match[1])
+              days += 1
             }
 
-            send({ total: typeof total === 'number' ? total : null })
+            if (days === 0) return send({ total: null })
+
+            contributions = { total, at: Date.now() }
+            send({ total })
           })
           .catch(() => send({ total: null }))
       })

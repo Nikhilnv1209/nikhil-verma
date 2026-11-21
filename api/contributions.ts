@@ -6,9 +6,12 @@ type ApiResponse = {
   setHeader: (name: string, value: string) => void
 }
 
-const CONTRIBUTIONS_KEY = 'portfolio:contributions'
+/* v2: the value changed shape of source (GitHub page rather than a third-party
+   API), so a new key avoids serving the stale cached number for an hour. */
+const CONTRIBUTIONS_KEY = 'portfolio:contributions:v2'
 const CONTRIBUTIONS_TTL = 60 * 60
 const GITHUB_USER = 'Nikhilnv1209'
+const PROFILE_URL = `https://github.com/users/${GITHUB_USER}/contributions`
 
 const redisUrl =
   process.env.KV_REST_API_URL ?? process.env.UPSTASH_REDIS_REST_URL ?? ''
@@ -43,6 +46,10 @@ async function redisCommand<T>(
   }
 }
 
+/* GitHub's own contribution calendar is the source of truth: it already applies
+   the default-branch rule and includes private contributions. The daily cells
+   carry their counts in tooltips, so summing them reproduces the profile number
+   exactly — no token, no third-party lag. */
 async function readContributions(): Promise<number | null> {
   const cached = await redisCommand<string>('get', CONTRIBUTIONS_KEY)
   if (typeof cached === 'string') {
@@ -51,18 +58,28 @@ async function readContributions(): Promise<number | null> {
   }
 
   try {
-    const response = await fetch(
-      `https://github-contributions-api.jogruber.de/v4/${GITHUB_USER}?y=last`,
-      { signal: AbortSignal.timeout(5000) },
-    )
+    const response = await fetch(PROFILE_URL, {
+      headers: {
+        'User-Agent':
+          'nikhil-verma-portfolio (+https://nikhil-verma-in.vercel.app)',
+        Accept: 'text/html',
+      },
+      signal: AbortSignal.timeout(8000),
+    })
 
     if (!response.ok) return null
 
-    const payload = (await response.json()) as {
-      total?: { lastYear?: number }
+    const html = await response.text()
+    let total = 0
+    let days = 0
+
+    for (const match of html.matchAll(/(\d+) contributions? on /g)) {
+      total += Number(match[1])
+      days += 1
     }
-    const total = payload.total?.lastYear
-    if (typeof total !== 'number') return null
+
+    // No calendar cells means the markup changed; fail rather than report zero.
+    if (days === 0) return null
 
     await redisCommand('set', CONTRIBUTIONS_KEY, total, 'EX', CONTRIBUTIONS_TTL)
     return total
