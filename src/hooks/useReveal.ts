@@ -1,7 +1,11 @@
 import { useEffect, useRef, useState } from 'react'
 
 type RevealOptions = {
-  /** How much of the element must be on screen before it counts as seen. */
+  /**
+   * Any overlap counts by default. A ratio above zero would never be reached by
+   * an element that starts at zero height (media before its image loads), and
+   * such an element would then stay hidden for good.
+   */
   threshold?: number
   /** Shrinks the viewport so cards land after they clear the fold, not on it. */
   rootMargin?: string
@@ -12,7 +16,7 @@ type RevealOptions = {
  * above the fold is visible immediately, so this never delays first paint.
  */
 export function useReveal<T extends HTMLElement = HTMLDivElement>({
-  threshold = 0.2,
+  threshold = 0,
   rootMargin = '0px 0px -8% 0px',
 }: RevealOptions = {}) {
   const ref = useRef<T>(null)

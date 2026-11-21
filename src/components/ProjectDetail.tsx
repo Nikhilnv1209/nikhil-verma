@@ -48,132 +48,175 @@ export function ProjectDetail({ slug }: { slug: string }) {
       </header>
 
       <main className="mx-auto max-w-5xl px-6 pb-24 pt-10 sm:pt-14">
-      <Link
-        to="/"
-        className="inline-flex items-center gap-2 text-sm text-stone-500 transition hover:text-stone-900 dark:text-stone-400 dark:hover:text-stone-100"
-      >
-        <ArrowUpRightIcon className="size-3.5 rotate-[-135deg]" />
-        Back to home
-      </Link>
+        <Link
+          to="/"
+          className="inline-flex items-center gap-2 text-sm text-stone-500 transition hover:text-stone-900 dark:text-stone-400 dark:hover:text-stone-100"
+        >
+          <ArrowUpRightIcon className="size-3.5 rotate-[-135deg]" />
+          Back to home
+        </Link>
 
-      <p className="mt-10 font-mono text-xs uppercase tracking-[0.2em] text-accent-700 dark:text-accent-400">
-        {project.label}
-      </p>
+        <div className="mt-10 flex items-center justify-between gap-4">
+          <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-accent-700 sm:text-xs dark:text-accent-400">
+            <span className="text-stone-400 dark:text-stone-500">
+              {String(index + 1).padStart(2, '0')}
+            </span>
+            <span className="mx-1.5 text-stone-300 dark:text-stone-600">/</span>
+            {project.label}
+          </p>
+          {project.demo ? (
+            <span className="shrink-0 rounded-full border border-accent-500/30 bg-accent-500/10 px-2 py-0.5 text-[10px] font-medium uppercase tracking-wider text-accent-700 dark:text-accent-300">
+              Live
+            </span>
+          ) : null}
+        </div>
 
-      <h1 className="mt-3 font-serif text-4xl font-normal tracking-tight text-stone-900 sm:text-6xl dark:text-stone-100">
-        {project.title}
-      </h1>
+        <h1 className="mt-3 font-serif text-4xl font-normal tracking-tight text-stone-900 sm:text-6xl dark:text-stone-100">
+          {project.title}
+        </h1>
 
-      <p className="mt-5 max-w-2xl text-lg leading-8 text-pretty text-stone-600 dark:text-stone-400">
-        {project.description}
-      </p>
+        <p className="mt-5 max-w-2xl text-lg leading-8 text-pretty text-stone-600 dark:text-stone-400">
+          {project.description}
+        </p>
 
-      <div className="mt-7 flex flex-wrap gap-3">
-        {project.demo ? (
+        <div className="mt-7 flex flex-wrap gap-3">
+          {project.demo ? (
+            <a
+              href={project.demo}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-2 rounded-xl bg-stone-900 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-stone-700 dark:bg-white dark:text-stone-950 dark:hover:bg-stone-200"
+            >
+              Live demo
+              <ArrowUpRightIcon className="size-4" />
+            </a>
+          ) : null}
           <a
-            href={project.demo}
+            href={project.href}
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center gap-2 rounded-xl bg-stone-900 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-stone-700 dark:bg-white dark:text-stone-950 dark:hover:bg-stone-200"
+            className="inline-flex items-center gap-2 rounded-xl border border-stone-300 px-4 py-2.5 text-sm font-semibold text-stone-700 transition hover:border-stone-400 hover:bg-stone-100 dark:border-stone-700 dark:text-stone-200 dark:hover:bg-stone-800/60"
           >
-            Live demo
+            Source code
             <ArrowUpRightIcon className="size-4" />
           </a>
-        ) : null}
-        <a
-          href={project.href}
-          target="_blank"
-          rel="noreferrer"
-          className="inline-flex items-center gap-2 rounded-xl border border-stone-300 px-4 py-2.5 text-sm font-semibold text-stone-700 transition hover:border-stone-400 hover:bg-stone-100 dark:border-stone-700 dark:text-stone-200 dark:hover:bg-stone-800/60"
-        >
-          Source code
-          <ArrowUpRightIcon className="size-4" />
-        </a>
-      </div>
+        </div>
 
-      {project.phones ? (
-        <div className="mt-12 grid gap-6 sm:grid-cols-2">
-          {project.phones.map((source, index) => (
+        {/* The hero media paints immediately: it is the page's main content, and
+            hiding it behind a scroll observer costs the largest paint. */}
+        <div className="mt-12">
+          <div className="media-stage overflow-hidden rounded-[14px] ring-1 ring-stone-900/10 dark:ring-white/10">
+            {project.phones ? (
+              <div className="mx-auto grid max-w-md grid-cols-2 gap-3 p-4 sm:max-w-xl sm:gap-6 sm:p-8">
+                {project.phones.map((source, phoneIndex) => (
+                  <div
+                    key={source}
+                    style={{ aspectRatio: project.mediaAspect }}
+                    className="overflow-hidden rounded-[14px] border border-white/10 shadow-[0_22px_60px_-16px_rgba(0,0,0,0.85)]"
+                  >
+                    <img
+                      src={source}
+                      alt={`${project.title} screen ${phoneIndex + 1}`}
+                      loading={phoneIndex === 0 ? 'eager' : 'lazy'}
+                      className="size-full object-cover"
+                    />
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="relative aspect-[16/10] w-full">
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  fetchPriority="high"
+                  className="absolute inset-0 size-full object-contain"
+                />
+              </div>
+            )}
+          </div>
+
+          {project.gallery?.map((source) => (
             <div
               key={source}
-              className="overflow-hidden rounded-[20px] border border-stone-200 bg-stone-900 shadow-xl shadow-stone-900/20 dark:border-stone-800"
+              className="media-stage mt-5 overflow-hidden rounded-[14px] ring-1 ring-stone-900/10 dark:ring-white/10"
             >
-              <img
-                src={source}
-                alt={`${project.title} screen ${index + 1}`}
-                loading="lazy"
-                className="w-full"
-              />
+              <div className="relative aspect-[16/10] w-full">
+                <img
+                  src={source}
+                  alt={`${project.title} interface`}
+                  loading="lazy"
+                  className="absolute inset-0 size-full object-contain"
+                />
+              </div>
             </div>
           ))}
         </div>
-      ) : (
-        <>
-          <img
-            src={project.image}
-            alt={project.title}
-            className="mt-12 w-full rounded-2xl border border-stone-200 object-cover dark:border-stone-800"
-          />
 
-          {project.gallery?.map((source) => (
+        <div className="mt-14 grid gap-10 border-t border-stone-200 pt-10 md:grid-cols-[1fr_1.6fr] md:gap-16 dark:border-stone-800">
+          <div>
+            <h2 className="font-mono text-[10px] uppercase tracking-[0.2em] text-stone-500 sm:text-xs dark:text-stone-400">
+              Stack
+            </h2>
+            <ul className="mt-4 flex flex-wrap gap-1.5">
+              {project.tech.map((tech) => (
+                <li key={tech} className="tech-pill">
+                  {tech}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h2 className="font-mono text-[10px] uppercase tracking-[0.2em] text-stone-500 sm:text-xs dark:text-stone-400">
+              Highlights
+            </h2>
+            <ol className="mt-4 space-y-3">
+              {project.highlights.map((highlight, position) => (
+                <li key={highlight} className="flex gap-3.5">
+                  <span
+                    aria-hidden="true"
+                    className="mt-1 font-mono text-[11px] tabular-nums text-stone-400 dark:text-stone-500"
+                  >
+                    {String(position + 1).padStart(2, '0')}
+                  </span>
+                  <span className="text-sm leading-6 text-stone-600 dark:text-stone-400">
+                    {highlight}
+                  </span>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </div>
+
+        <Link
+          to={`/projects/${next.slug}`}
+          className="card-surface group mt-16 flex items-center gap-4 rounded-[14px] p-3 sm:gap-5 sm:p-4"
+        >
+          {/* The tile takes the shape of what it holds, so the preview is
+              never cropped: portrait for device shots, 16:10 for screenshots. */}
+          <span
+            className={`media-stage relative shrink-0 overflow-hidden rounded-[10px] ${
+              next.phones ? 'aspect-[3/4] w-14 sm:w-20' : 'aspect-[16/10] w-24 sm:w-36'
+            }`}
+          >
             <img
-              key={source}
-              src={source}
-              alt={`${project.title} interface`}
+              src={next.image}
+              alt=""
+              aria-hidden="true"
               loading="lazy"
-              className="mt-6 w-full rounded-2xl border border-stone-200 object-cover dark:border-stone-800"
+              className="absolute inset-0 size-full object-contain p-1.5"
             />
-          ))}
-        </>
-      )}
-
-      <div className="mt-16 grid gap-10 border-t border-stone-200 pt-10 md:grid-cols-[1fr_1.4fr] md:gap-16 dark:border-stone-800">
-        <div>
-          <h2 className="font-mono text-xs uppercase tracking-[0.2em] text-stone-500 dark:text-stone-400">
-            Stack
-          </h2>
-          <ul className="mt-4 flex flex-wrap gap-2">
-            {project.tech.map((tech) => (
-              <li
-                key={tech}
-                className="rounded-lg bg-stone-100 px-2.5 py-1.5 text-xs font-medium text-stone-700 dark:bg-stone-800 dark:text-stone-300"
-              >
-                {tech}
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <div>
-          <h2 className="font-mono text-xs uppercase tracking-[0.2em] text-stone-500 dark:text-stone-400">
-            Highlights
-          </h2>
-          <ul className="mt-4 space-y-2.5 text-sm leading-6 text-stone-600 dark:text-stone-400">
-            {project.highlights.map((highlight) => (
-              <li key={highlight} className="flex gap-3">
-                <span
-                  className="mt-3 h-px w-3 shrink-0 bg-stone-300 dark:bg-stone-700"
-                  aria-hidden="true"
-                />
-                <span>{highlight}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
-
-      <Link
-        to={`/projects/${next.slug}`}
-        className="group mt-16 flex items-center justify-between gap-6 border-t border-stone-200 pt-8 dark:border-stone-800"
-      >
-        <span className="font-mono text-xs uppercase tracking-[0.2em] text-stone-500 dark:text-stone-400">
-          Next project
-        </span>
-        <span className="inline-flex items-center gap-2 font-serif text-2xl text-stone-900 transition group-hover:text-accent-700 dark:text-stone-100 dark:group-hover:text-accent-400">
-          {next.title}
-          <ArrowUpRightIcon className="size-5" />
-        </span>
-      </Link>
+          </span>
+          <span className="min-w-0 flex-1">
+            <span className="block font-mono text-[10px] uppercase tracking-[0.2em] text-stone-500 dark:text-stone-400">
+              Next project
+            </span>
+            <span className="mt-1 block truncate font-serif text-xl text-stone-900 sm:text-2xl dark:text-stone-100">
+              {next.title}
+            </span>
+          </span>
+          <ArrowUpRightIcon className="mr-1 size-4 shrink-0 text-stone-400 transition-transform duration-300 ease-out group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-accent-700 dark:group-hover:text-accent-400" />
+        </Link>
       </main>
     </>
   )
