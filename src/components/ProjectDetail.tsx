@@ -18,7 +18,7 @@ export function ProjectDetail({ slug }: { slug: string }) {
         </h1>
         <Link
           to="/"
-          className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-emerald-700 dark:text-emerald-400"
+          className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-accent-700 dark:text-accent-400"
         >
           Back to home
           <ArrowUpRightIcon className="size-3.5" />
@@ -56,7 +56,7 @@ export function ProjectDetail({ slug }: { slug: string }) {
         Back to home
       </Link>
 
-      <p className="mt-10 font-mono text-xs uppercase tracking-[0.2em] text-emerald-700 dark:text-emerald-400">
+      <p className="mt-10 font-mono text-xs uppercase tracking-[0.2em] text-accent-700 dark:text-accent-400">
         {project.label}
       </p>
 
@@ -64,7 +64,7 @@ export function ProjectDetail({ slug }: { slug: string }) {
         {project.title}
       </h1>
 
-      <p className="mt-5 max-w-2xl text-lg leading-8 text-pretty text-stone-600 dark:text-slate-400">
+      <p className="mt-5 max-w-2xl text-lg leading-8 text-pretty text-stone-600 dark:text-stone-400">
         {project.description}
       </p>
 
@@ -84,7 +84,7 @@ export function ProjectDetail({ slug }: { slug: string }) {
           href={project.href}
           target="_blank"
           rel="noreferrer"
-          className="inline-flex items-center gap-2 rounded-xl border border-stone-300 px-4 py-2.5 text-sm font-semibold text-stone-700 transition hover:border-stone-400 hover:bg-stone-100 dark:border-stone-700 dark:text-slate-200 dark:hover:bg-stone-800/60"
+          className="inline-flex items-center gap-2 rounded-xl border border-stone-300 px-4 py-2.5 text-sm font-semibold text-stone-700 transition hover:border-stone-400 hover:bg-stone-100 dark:border-stone-700 dark:text-stone-200 dark:hover:bg-stone-800/60"
         >
           Source code
           <ArrowUpRightIcon className="size-4" />
@@ -148,7 +148,7 @@ export function ProjectDetail({ slug }: { slug: string }) {
           <h2 className="font-mono text-xs uppercase tracking-[0.2em] text-stone-500 dark:text-stone-400">
             Highlights
           </h2>
-          <ul className="mt-4 space-y-2.5 text-sm leading-6 text-stone-600 dark:text-slate-400">
+          <ul className="mt-4 space-y-2.5 text-sm leading-6 text-stone-600 dark:text-stone-400">
             {project.highlights.map((highlight) => (
               <li key={highlight} className="flex gap-3">
                 <span
@@ -169,7 +169,7 @@ export function ProjectDetail({ slug }: { slug: string }) {
         <span className="font-mono text-xs uppercase tracking-[0.2em] text-stone-500 dark:text-stone-400">
           Next project
         </span>
-        <span className="inline-flex items-center gap-2 font-serif text-2xl text-stone-900 transition group-hover:text-emerald-700 dark:text-stone-100 dark:group-hover:text-emerald-400">
+        <span className="inline-flex items-center gap-2 font-serif text-2xl text-stone-900 transition group-hover:text-accent-700 dark:text-stone-100 dark:group-hover:text-accent-400">
           {next.title}
           <ArrowUpRightIcon className="size-5" />
         </span>

@@ -59,7 +59,7 @@ export function TopProgress() {
     >
       <div
         ref={barRef}
-        className="h-full w-full origin-left bg-emerald-500 shadow-[0_0_12px_rgba(16,185,129,0.7)]"
+        className="h-full w-full origin-left bg-accent-500 shadow-[0_0_12px_rgba(16,185,129,0.7)]"
       />
     </div>
   )

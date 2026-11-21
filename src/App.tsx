@@ -47,7 +47,7 @@ function Routes() {
 function App() {
   return (
     <Router>
-      <div className="min-h-screen bg-stone-50 text-stone-700 selection:bg-emerald-600/15 selection:text-stone-900 dark:bg-stone-950 dark:text-slate-300 dark:selection:bg-emerald-400/20 dark:selection:text-stone-100">
+      <div className="min-h-screen bg-stone-50 text-stone-700 selection:bg-accent-700/15 selection:text-stone-900 dark:bg-stone-950 dark:text-stone-300 dark:selection:bg-accent-400/20 dark:selection:text-stone-100">
         <TopProgress />
         <Cursor />
         <Routes />

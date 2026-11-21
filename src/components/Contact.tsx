@@ -16,7 +16,7 @@ export function Contact() {
 
       <a
         href={`mailto:${profile.email}`}
-        className="mt-8 inline-flex items-baseline gap-2 border-b border-stone-300 pb-1 font-serif text-lg text-stone-900 transition hover:border-emerald-600 sm:text-2xl dark:border-stone-700 dark:text-stone-100 dark:hover:border-emerald-400"
+        className="mt-8 inline-flex items-baseline gap-2 border-b border-stone-300 pb-1 font-serif text-lg text-stone-900 transition hover:border-accent-600 sm:text-2xl dark:border-stone-700 dark:text-stone-100 dark:hover:border-accent-400"
       >
         <span className="break-all">{profile.email}</span>
         <ArrowUpRightIcon className="size-4 shrink-0" />

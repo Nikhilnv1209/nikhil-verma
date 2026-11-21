@@ -114,7 +114,7 @@ export function Cursor() {
 
         ctx.beginPath()
         ctx.arc(point.x, point.y, radius, 0, Math.PI * 2)
-        ctx.fillStyle = `rgba(16, 185, 129, ${(progress * (hovering ? 0.5 : 0.32)).toFixed(3)})`
+        ctx.fillStyle = `rgba(59, 130, 246, ${(progress * (hovering ? 0.5 : 0.32)).toFixed(3)})`
         ctx.fill()
       }
 

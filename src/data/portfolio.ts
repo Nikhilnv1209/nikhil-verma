@@ -63,7 +63,7 @@ export const navItems: NavItem[] = [
 
 export const experience: ExperienceItem[] = [
   {
-    company: 'qikfox',
+    company: 'qikfox Cybersecurity Systems, Inc.',
     note: 'Methodworks Pvt. Ltd. — India payroll',
     role: 'Software Development Engineer',
     period: 'Jul 2024 – Present',
@@ -81,7 +81,7 @@ export const experience: ExperienceItem[] = [
     ],
   },
   {
-    company: 'qikfox',
+    company: 'qikfox Cybersecurity Systems, Inc.',
     note: 'Methodworks Pvt. Ltd. — India payroll',
     role: 'Associate Software Developer Engineer',
     period: 'Jul 2023 – Jul 2024',

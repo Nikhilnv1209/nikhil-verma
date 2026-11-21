@@ -18,12 +18,12 @@ export function Projects() {
           >
             <Link
               to={`/projects/${project.slug}`}
-              className="block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600"
+              className="block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-600"
               aria-label={`View ${project.title}`}
             >
               <div className="relative aspect-[16/10] overflow-hidden bg-stone-100 dark:bg-stone-900">
                 {project.phones ? (
-                  <div className="absolute inset-0 flex items-center justify-center gap-5 bg-linear-to-br from-[#16302d] via-[#0e1a19] to-[#0b1416]">
+                  <div className="absolute inset-0 flex items-center justify-center gap-5 bg-linear-to-br from-[#35302a] via-[#1e1a15] to-[#12110d]">
                     {project.phones.map((source, index) => (
                       <div
                         key={source}
@@ -59,7 +59,7 @@ export function Projects() {
                   {project.label}
                 </span>
                 {project.demo ? (
-                  <span className="rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2 py-0.5 text-[10px] font-medium uppercase tracking-wider text-emerald-700 dark:text-emerald-300">
+                  <span className="rounded-full border border-accent-500/30 bg-accent-500/10 px-2 py-0.5 text-[10px] font-medium uppercase tracking-wider text-accent-700 dark:text-accent-300">
                     Live
                   </span>
                 ) : null}
@@ -68,13 +68,13 @@ export function Projects() {
               <h3 className="mt-2 font-serif text-xl text-stone-900 dark:text-stone-100">
                 {project.title}
               </h3>
-              <p className="mt-2 text-sm leading-6 text-stone-600 dark:text-slate-400">
+              <p className="mt-2 text-sm leading-6 text-stone-600 dark:text-stone-400">
                 {project.summary}
               </p>
 
               <Link
                 to={`/projects/${project.slug}`}
-                className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-stone-900 transition hover:text-emerald-700 dark:text-stone-100 dark:hover:text-emerald-400"
+                className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-stone-900 transition hover:text-accent-700 dark:text-stone-100 dark:hover:text-accent-400"
               >
                 View project
                 <ArrowUpRightIcon className="size-3.5" />

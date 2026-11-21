@@ -11,27 +11,40 @@
     ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono',
     'Courier New', monospace;
 
-  /* Deep Teal — neutral ramp */
-  --color-stone-50: #edf3f1;
-  --color-stone-100: #e3ecea;
-  --color-stone-200: #cddcd9;
-  --color-stone-300: #a7bfbb;
-  --color-stone-400: #7b9894;
-  --color-stone-500: #5c7a76;
-  --color-stone-600: #455d5a;
-  --color-stone-700: #374a47;
-  --color-stone-800: #1b2926;
-  --color-stone-900: #12201e;
-  --color-stone-950: #0b1416;
+  /* Bone & Cobalt — neutral ramp */
+  --color-stone-50: #f7f5ee;
+  --color-stone-100: #efece2;
+  --color-stone-200: #dfd9c9;
+  --color-stone-300: #c8bfa9;
+  --color-stone-400: #aa9f86;
+  --color-stone-500: #8b8067;
+  --color-stone-600: #6f6551;
+  --color-stone-700: #575041;
+  --color-stone-800: #3a352b;
+  --color-stone-900: #22201a;
+  --color-stone-950: #12110d;
+
+  /* Cobalt accent */
+  --color-accent-50: #eff6ff;
+  --color-accent-100: #dbeafe;
+  --color-accent-200: #bfdbfe;
+  --color-accent-300: #93c5fd;
+  --color-accent-400: #60a5fa;
+  --color-accent-500: #3b82f6;
+  --color-accent-600: #2563eb;
+  --color-accent-700: #1d4ed8;
+  --color-accent-800: #1e40af;
+  --color-accent-900: #1e3a8a;
+  --color-accent-950: #172554;
 }
 
 html {
-  background-color: #edf3f1;
+  background-color: #f7f5ee;
   scroll-behavior: smooth;
 }
 
 html.dark {
-  background-color: #0b1416;
+  background-color: #12110d;
   color-scheme: dark;
 }
 
@@ -100,14 +113,14 @@ html.dark .portrait-frame {
   box-shadow:
     0 1px 2px rgba(0, 0, 0, 0.04),
     0 22px 50px -18px rgba(0, 0, 0, 0.35),
-    0 0 0 3px rgba(16, 185, 129, 0.16);
+    0 0 0 3px rgba(37, 99, 235, 0.18);
 }
 
 html.dark .portrait[data-active='true'] .portrait-frame {
   box-shadow:
     0 1px 2px rgba(0, 0, 0, 0.3),
     0 24px 60px -18px rgba(0, 0, 0, 0.8),
-    0 0 0 3px rgba(52, 211, 153, 0.18);
+    0 0 0 3px rgba(96, 165, 250, 0.2);
 }
 
 .portrait-glare {
@@ -202,9 +215,9 @@ html.cursor-custom textarea {
   height: 9px;
   margin: -4.5px 0 0 -4.5px;
   border-radius: 9999px;
-  background-color: var(--color-emerald-500);
+  background-color: var(--color-accent-500);
   box-shadow: 0 0 0 4px
-    color-mix(in oklab, var(--color-emerald-500) 18%, transparent);
+    color-mix(in oklab, var(--color-accent-500) 18%, transparent);
   transform: scale(var(--scale, 1));
   transition: transform 160ms cubic-bezier(0.23, 1, 0.32, 1);
 }

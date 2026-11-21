@@ -14,7 +14,7 @@ export function HeroBanner() {
 
   return (
     <div id="top" className="relative">
-      <div className="relative aspect-[21/9] w-full overflow-hidden bg-[#0b1416] sm:aspect-[4/1]">
+      <div className="relative aspect-[21/9] w-full overflow-hidden bg-[#12110d] sm:aspect-[4/1]">
         <img
           src={src}
           alt=""
@@ -41,7 +41,7 @@ export function HeroBanner() {
         <div className="absolute bottom-2 right-3 flex items-center gap-2.5 rounded-md bg-black/30 px-2 py-1 font-mono text-xs text-stone-100 backdrop-blur-sm sm:bottom-3 sm:right-5 sm:text-sm">
           <span className="flex items-center gap-2 tracking-[0.15em]">
             <span
-              className="size-1.5 rounded-full bg-emerald-400"
+              className="size-1.5 rounded-full bg-accent-400"
               aria-hidden="true"
             />
             <Clock />
