@@ -1,13 +1,7 @@
-export type LiveStats = {
-  visits: number | null
-  contributions: number | null
-}
-
 const SESSION_KEY = 'portfolio:visited'
-const ENDPOINT = '/api/stats'
 
-// One request per page load, shared by every component that asks for stats.
-let request: Promise<LiveStats | null> | null = null
+let visitsRequest: Promise<number | null> | null = null
+let contributionsRequest: Promise<number | null> | null = null
 
 function hasVisited(): boolean {
   try {
@@ -25,32 +19,42 @@ function markVisited() {
   }
 }
 
-export function loadLiveStats(): Promise<LiveStats | null> {
-  if (request) return request
+/** One POST per browser session; later loads only read. */
+export function loadVisits(): Promise<number | null> {
+  if (visitsRequest) return visitsRequest
 
-  request = (async () => {
+  visitsRequest = (async () => {
     const seen = hasVisited()
 
-    // POST counts a new session; GET only reads, so a refresh does not inflate.
-    const response = await fetch(ENDPOINT, {
+    const response = await fetch('/api/visits', {
       method: seen ? 'GET' : 'POST',
     })
 
     if (!response.ok) return null
 
-    const payload = (await response.json()) as {
-      visits?: unknown
-      contributions?: unknown
-    }
-
+    const payload = (await response.json()) as { visits?: unknown }
     const visits = typeof payload.visits === 'number' ? payload.visits : null
-    const contributions =
-      typeof payload.contributions === 'number' ? payload.contributions : null
 
     if (!seen && visits !== null) markVisited()
 
-    return { visits, contributions }
+    return visits
   })().catch(() => null)
 
-  return request
+  return visitsRequest
+}
+
+/* Cached by the browser (5 min) and by Vercel's edge (1 hour), so this is
+   usually served without touching the function or Redis at all. */
+export function loadContributions(): Promise<number | null> {
+  if (contributionsRequest) return contributionsRequest
+
+  contributionsRequest = (async () => {
+    const response = await fetch('/api/contributions')
+    if (!response.ok) return null
+
+    const payload = (await response.json()) as { total?: unknown }
+    return typeof payload.total === 'number' ? payload.total : null
+  })().catch(() => null)
+
+  return contributionsRequest
 }

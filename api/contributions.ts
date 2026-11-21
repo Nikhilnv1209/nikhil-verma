@@ -6,21 +6,17 @@ type ApiResponse = {
   setHeader: (name: string, value: string) => void
 }
 
-const VISITS_KEY = 'portfolio:visits'
 const CONTRIBUTIONS_KEY = 'portfolio:contributions'
 const CONTRIBUTIONS_TTL = 60 * 60
 const GITHUB_USER = 'Nikhilnv1209'
 
-// Vercel's Upstash integration supplies either naming convention.
 const redisUrl =
   process.env.KV_REST_API_URL ?? process.env.UPSTASH_REDIS_REST_URL ?? ''
 const redisToken =
   process.env.KV_REST_API_TOKEN ?? process.env.UPSTASH_REDIS_REST_TOKEN ?? ''
 const storeReady = Boolean(redisUrl && redisToken)
 
-/* Returns `undefined` when the request itself failed (bad token, timeout,
-   Upstash down) and `null` when the command succeeded but the key is missing.
-   Keeping those apart stops an auth failure from reading as "0 visits". */
+/* `undefined` means the request failed; `null` means the key is missing. */
 async function redisCommand<T>(
   command: string,
   ...args: (string | number)[]
@@ -47,8 +43,6 @@ async function redisCommand<T>(
   }
 }
 
-/* Contributions are cached for an hour so a burst of visits costs one upstream
-   request. Without Redis we still serve the live number, just uncached. */
 async function readContributions(): Promise<number | null> {
   const cached = await redisCommand<string>('get', CONTRIBUTIONS_KEY)
   if (typeof cached === 'string') {
@@ -81,33 +75,19 @@ export default async function handler(
   request: ApiRequest,
   response: ApiResponse,
 ) {
-  response.setHeader('Cache-Control', 'no-store')
+  /* This number moves a few times a day, so let the browser hold it briefly and
+     let Vercel's edge hold it for an hour. Most page loads never reach this
+     function, which is the cheapest possible Redis hit rate. */
+  response.setHeader(
+    'Cache-Control',
+    'public, max-age=300, s-maxage=3600, stale-while-revalidate=86400',
+  )
 
-  const method = request.method ?? 'GET'
-
-  if (method !== 'GET' && method !== 'POST') {
-    response.setHeader('Allow', 'GET, POST')
+  if ((request.method ?? 'GET') !== 'GET') {
+    response.setHeader('Allow', 'GET')
     return response.status(405).json({ error: 'method-not-allowed' })
   }
 
-  let visits: number | null = null
-
-  if (storeReady) {
-    if (method === 'POST') {
-      const incremented = await redisCommand<number>('incr', VISITS_KEY)
-      visits = typeof incremented === 'number' ? incremented : null
-    } else {
-      const stored = await redisCommand<string | number>('get', VISITS_KEY)
-      if (stored === undefined) {
-        visits = null
-      } else {
-        const parsed = Number(stored ?? 0)
-        visits = Number.isFinite(parsed) ? parsed : 0
-      }
-    }
-  }
-
-  const contributions = await readContributions()
-
-  return response.status(200).json({ visits, contributions })
+  const total = await readContributions()
+  return response.status(200).json({ total })
 }

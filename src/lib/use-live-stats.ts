@@ -1,5 +1,10 @@
 import { useEffect, useState } from 'react'
-import { loadLiveStats, type LiveStats } from './live-stats'
+import { loadContributions, loadVisits } from './live-stats'
+
+type LiveStats = {
+  visits: number | null
+  contributions: number | null
+}
 
 const initial: LiveStats = { visits: null, contributions: null }
 
@@ -9,8 +14,14 @@ export function useLiveStats(): LiveStats {
   useEffect(() => {
     let active = true
 
-    loadLiveStats().then((value) => {
-      if (active && value) setStats(value)
+    // Each number lands as soon as it is ready, so a slow one never blocks the
+    // other from appearing.
+    loadVisits().then((visits) => {
+      if (active) setStats((current) => ({ ...current, visits }))
+    })
+
+    loadContributions().then((contributions) => {
+      if (active) setStats((current) => ({ ...current, contributions }))
     })
 
     return () => {

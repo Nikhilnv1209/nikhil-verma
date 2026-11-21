@@ -6,8 +6,8 @@ const CONTRIBUTIONS_URL =
   'https://github-contributions-api.jogruber.de/v4/Nikhilnv1209?y=last'
 const CONTRIBUTIONS_TTL = 60 * 60 * 1000
 
-/* Mirrors api/stats.ts so `npm run dev` exercises the real UI without Redis.
-   The counter lives in memory and resets when the dev server restarts. */
+/* Mirrors api/visits.ts and api/contributions.ts so `npm run dev` exercises the
+   real UI without Redis. The counter is in memory and resets with the server. */
 function devStats(): Plugin {
   let visits = 0
   let contributions: { total: number; at: number } | null = null
@@ -17,16 +17,23 @@ function devStats(): Plugin {
     configureServer(server) {
       server.middlewares.use((request, response, next) => {
         const path = request.url?.split('?')[0]
-        if (path !== '/api/stats') return next()
+
+        if (path !== '/api/visits' && path !== '/api/contributions') {
+          return next()
+        }
 
         response.setHeader('Content-Type', 'application/json')
-
         const send = (body: unknown) => response.end(JSON.stringify(body))
 
-        if (request.method === 'POST') visits += 1
+        if (path === '/api/visits') {
+          response.setHeader('Cache-Control', 'no-store')
+
+          if (request.method === 'POST') visits += 1
+          return send({ visits })
+        }
 
         if (contributions && Date.now() - contributions.at < CONTRIBUTIONS_TTL) {
-          return send({ visits, contributions: contributions.total })
+          return send({ total: contributions.total })
         }
 
         fetch(CONTRIBUTIONS_URL, { signal: AbortSignal.timeout(5000) })
@@ -39,12 +46,9 @@ function devStats(): Plugin {
               contributions = { total, at: Date.now() }
             }
 
-            send({
-              visits,
-              contributions: typeof total === 'number' ? total : null,
-            })
+            send({ total: typeof total === 'number' ? total : null })
           })
-          .catch(() => send({ visits, contributions: null }))
+          .catch(() => send({ total: null }))
       })
     },
   }
