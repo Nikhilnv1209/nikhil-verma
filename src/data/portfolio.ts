@@ -26,6 +26,8 @@ export type Project = {
   image?: string
   phones?: string[]
   gallery?: string[]
+  /** Width / height of a device shot, so its frame can hug the screen. */
+  mediaAspect?: number
   tech: string[]
   highlights: string[]
   href: string
@@ -158,6 +160,7 @@ export const projects: Project[] = [
       '/projects/expensetracker-home.webp',
       '/projects/expensetracker-settings.webp',
     ],
+    mediaAspect: 620 / 1306,
     tech: [
       'Kotlin',
       'Jetpack Compose',
