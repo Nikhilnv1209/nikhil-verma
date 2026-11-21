@@ -10,6 +10,8 @@ export type ExperienceItem = {
   period: string
   type: string
   location?: string
+  /** Company mark; falls back to the initials in `mark` when absent. */
+  logo?: string
   mark: string
   tech: string[]
   highlights: string[]
@@ -69,6 +71,7 @@ export const experience: ExperienceItem[] = [
     period: 'Jul 2024 – Present',
     type: 'Full-time',
     location: 'Noida, India',
+    logo: '/logos/qikfox.png',
     mark: 'Q',
     tech: ['C', 'Rust', 'JavaScript', 'Chromium', 'Android', 'tree-sitter'],
     highlights: [
@@ -87,6 +90,7 @@ export const experience: ExperienceItem[] = [
     period: 'Jul 2023 – Jul 2024',
     type: 'Full-time',
     location: 'Noida, India',
+    logo: '/logos/qikfox.png',
     mark: 'Q',
     tech: ['Go', 'Python', 'Linux', 'MCP', 'AI Agents'],
     highlights: [
@@ -101,6 +105,7 @@ export const experience: ExperienceItem[] = [
     role: 'Frontend Developer Intern',
     period: 'May 2023 – Jul 2023',
     type: 'Internship',
+    logo: '/logos/kartexa.png',
     mark: 'K',
     tech: ['React', 'Tailwind CSS', 'Node.js'],
     highlights: [

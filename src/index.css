@@ -11,6 +11,10 @@
     ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono',
     'Courier New', monospace;
 
+  /* One easing curve for everything that moves. Fast out, long tail — reads
+     as weight rather than as bounce. */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+
   /* Bone & Cobalt — neutral ramp */
   --color-stone-50: #f7f5ee;
   --color-stone-100: #efece2;
@@ -160,6 +164,247 @@ html.dark .portrait[data-active='true'] .portrait-frame {
     transition: none;
   }
 }
+
+/* Cards
+   ---------------------------------------------------------------------------
+   Crisp, not glassy. To read as an object on a flat page a card needs a fill
+   that differs from the page, a visible hairline, and a shadow with a short
+   falloff. Translucency supplied none of those: 36% warm white over warm cream
+   is a ~1% luminance step, and a white border on a cream page has nothing to
+   separate. So: near-opaque fill, one hairline, a 2px ring of page colour for
+   breathing room, and two tight shadows.
+   --------------------------------------------------------------------------- */
+
+:root {
+  --card-bg: #fffdf8;
+  --card-bg-hover: #fffefa;
+  --card-ring: var(--color-stone-50);
+  --card-line: rgba(34, 32, 26, 0.11);
+  --card-line-hover: rgba(34, 32, 26, 0.17);
+  --card-line-open: rgba(34, 32, 26, 0.24);
+}
+
+html.dark {
+  --card-bg: #1a1814;
+  --card-bg-hover: #1e1b16;
+  --card-ring: var(--color-stone-950);
+  --card-line: rgba(255, 255, 255, 0.08);
+  --card-line-hover: rgba(255, 255, 255, 0.13);
+  --card-line-open: rgba(255, 255, 255, 0.2);
+}
+
+.card-surface {
+  background-color: var(--card-bg);
+  box-shadow:
+    inset 0 0 0 1px var(--card-line),
+    0 0 0 2px var(--card-ring),
+    0 1px 2px rgba(34, 32, 26, 0.05),
+    0 5px 14px -8px rgba(34, 32, 26, 0.16);
+  transition:
+    background-color 240ms var(--ease-out),
+    box-shadow 240ms var(--ease-out);
+}
+
+.card-surface:hover {
+  background-color: var(--card-bg-hover);
+  box-shadow:
+    inset 0 0 0 1px var(--card-line-hover),
+    0 0 0 2px var(--card-ring),
+    0 1px 2px rgba(34, 32, 26, 0.05),
+    0 8px 20px -10px rgba(34, 32, 26, 0.2);
+}
+
+html.dark .card-surface {
+  box-shadow:
+    inset 0 0 0 1px var(--card-line),
+    0 0 0 2px var(--card-ring),
+    0 1px 2px rgba(0, 0, 0, 0.45),
+    0 6px 18px -10px rgba(0, 0, 0, 0.7);
+}
+
+html.dark .card-surface:hover {
+  box-shadow:
+    inset 0 0 0 1px var(--card-line-hover),
+    0 0 0 2px var(--card-ring),
+    0 1px 2px rgba(0, 0, 0, 0.45),
+    0 10px 26px -12px rgba(0, 0, 0, 0.8);
+}
+
+/* An open row settles instead of jumping: the hairline firms up and the shadow
+   deepens a hair. No colour, no lift. */
+.card-surface[data-open='true'] {
+  box-shadow:
+    inset 0 0 0 1px var(--card-line-open),
+    0 0 0 2px var(--card-ring),
+    0 1px 2px rgba(34, 32, 26, 0.06),
+    0 12px 28px -14px rgba(34, 32, 26, 0.26);
+}
+
+html.dark .card-surface[data-open='true'] {
+  box-shadow:
+    inset 0 0 0 1px var(--card-line-open),
+    0 0 0 2px var(--card-ring),
+    0 1px 2px rgba(0, 0, 0, 0.5),
+    0 14px 32px -16px rgba(0, 0, 0, 0.85);
+}
+
+/* Company mark — the real logo, on a light tile so brand colour survives both
+   themes. */
+.logo-tile {
+  display: grid;
+  flex-shrink: 0;
+  place-items: center;
+  overflow: hidden;
+  border-radius: 11px;
+  background-color: #fff;
+  color: var(--color-stone-700);
+  box-shadow:
+    inset 0 0 0 1px rgba(34, 32, 26, 0.09),
+    0 1px 2px rgba(34, 32, 26, 0.07);
+}
+
+.logo-tile img {
+  width: 100%;
+  height: 100%;
+  padding: 7px;
+  object-fit: contain;
+}
+
+html.dark .logo-tile {
+  background-color: var(--color-stone-100);
+  color: var(--color-stone-800);
+  box-shadow:
+    inset 0 0 0 1px rgba(0, 0, 0, 0.22),
+    0 1px 2px rgba(0, 0, 0, 0.45);
+}
+
+/* Tech chips — separate objects, not a dotted string. */
+.tech-pill {
+  border-radius: 7px;
+  background-color: #fff;
+  padding: 0.1875rem 0.4375rem;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.35;
+  color: var(--color-stone-700);
+  box-shadow:
+    inset 0 0 0 1px rgba(34, 32, 26, 0.08),
+    0 1px 1px rgba(34, 32, 26, 0.04);
+}
+
+html.dark .tech-pill {
+  background-color: #23201a;
+  color: var(--color-stone-300);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.07),
+    0 1px 1px rgba(0, 0, 0, 0.35);
+}
+
+/* Accordion — the row opens on a curve, the body fades in a beat behind it. */
+.accordion {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 420ms var(--ease-out);
+}
+
+.accordion > * {
+  overflow: hidden;
+}
+
+.card-surface[data-open='true'] .accordion {
+  grid-template-rows: 1fr;
+}
+
+.accordion-body {
+  opacity: 0;
+  transform: translateY(-4px);
+  transition:
+    opacity 220ms var(--ease-out),
+    transform 220ms var(--ease-out);
+}
+
+.card-surface[data-open='true'] .accordion-body {
+  opacity: 1;
+  transform: none;
+  transition-duration: 320ms;
+  transition-delay: 70ms;
+}
+
+/* Reveal on scroll — a 12px lift over 480ms, staggered per card. */
+.reveal {
+  opacity: 0;
+  transform: translateY(12px);
+  transition:
+    opacity 480ms var(--ease-out),
+    transform 480ms var(--ease-out);
+}
+
+.reveal[data-visible='true'] {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+
+  .accordion,
+  .accordion-body {
+    transition: none;
+  }
+}
+
+/* Current-role marker. Slow enough to be a breath, not a blip. */
+.status-dot {
+  --dot: var(--color-accent-600);
+  position: relative;
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 9999px;
+  background-color: var(--dot);
+  animation: status-pulse 3.2s var(--ease-out) infinite;
+}
+
+html.dark .status-dot {
+  --dot: var(--color-accent-400);
+}
+
+@keyframes status-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 3px color-mix(in oklab, var(--dot) 16%, transparent);
+  }
+  50% {
+    box-shadow: 0 0 0 5px color-mix(in oklab, var(--dot) 6%, transparent);
+  }
+}
+
+/* Emphasis in prose: semibold, plus a whisper of accent under the baseline —
+   enough to guide the eye, not enough to read as a highlighter. */
+.highlight {
+  font-weight: 600;
+  color: var(--color-stone-900);
+  background-image: linear-gradient(
+    to top,
+    color-mix(in oklab, var(--color-accent-500) 14%, transparent) 0 32%,
+    transparent 32%
+  );
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+html.dark .highlight {
+  color: var(--color-stone-100);
+  background-image: linear-gradient(
+    to top,
+    color-mix(in oklab, var(--color-accent-400) 16%, transparent) 0 32%,
+    transparent 32%
+  );
+}
+
 
 @keyframes dropdown-in {
   from {
