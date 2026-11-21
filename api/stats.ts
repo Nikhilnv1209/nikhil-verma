@@ -18,11 +18,14 @@ const redisToken =
   process.env.KV_REST_API_TOKEN ?? process.env.UPSTASH_REDIS_REST_TOKEN ?? ''
 const storeReady = Boolean(redisUrl && redisToken)
 
+/* Returns `undefined` when the request itself failed (bad token, timeout,
+   Upstash down) and `null` when the command succeeded but the key is missing.
+   Keeping those apart stops an auth failure from reading as "0 visits". */
 async function redisCommand<T>(
   command: string,
   ...args: (string | number)[]
-): Promise<T | null> {
-  if (!storeReady) return null
+): Promise<T | null | undefined> {
+  if (!storeReady) return undefined
 
   const path = [command, ...args]
     .map((part) => encodeURIComponent(String(part)))
@@ -32,14 +35,15 @@ async function redisCommand<T>(
     const response = await fetch(`${redisUrl.replace(/\/+$/, '')}/${path}`, {
       headers: { Authorization: `Bearer ${redisToken}` },
       cache: 'no-store',
+      signal: AbortSignal.timeout(2500),
     })
 
-    if (!response.ok) return null
+    if (!response.ok) return undefined
 
-    const payload = (await response.json()) as { result?: T }
+    const payload = (await response.json()) as { result?: T | null }
     return payload.result ?? null
   } catch {
-    return null
+    return undefined
   }
 }
 
@@ -47,7 +51,7 @@ async function redisCommand<T>(
    request. Without Redis we still serve the live number, just uncached. */
 async function readContributions(): Promise<number | null> {
   const cached = await redisCommand<string>('get', CONTRIBUTIONS_KEY)
-  if (cached !== null) {
+  if (typeof cached === 'string') {
     const total = Number(cached)
     if (Number.isFinite(total)) return total
   }
@@ -94,8 +98,12 @@ export default async function handler(
       visits = typeof incremented === 'number' ? incremented : null
     } else {
       const stored = await redisCommand<string | number>('get', VISITS_KEY)
-      const parsed = Number(stored ?? 0)
-      visits = Number.isFinite(parsed) ? parsed : 0
+      if (stored === undefined) {
+        visits = null
+      } else {
+        const parsed = Number(stored ?? 0)
+        visits = Number.isFinite(parsed) ? parsed : 0
+      }
     }
   }
 
