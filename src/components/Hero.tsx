@@ -1,4 +1,5 @@
 import { profile } from '../data/portfolio'
+import { useLiveStats } from '../lib/use-live-stats'
 import {
   ChatIcon,
   DocumentIcon,
@@ -11,11 +12,8 @@ import { Portrait } from './Portrait'
 import { StackIcons } from './StackIcons'
 import { ThemeToggle } from './ThemeToggle'
 
-const stats = [
-  { value: '283', label: 'contributions in the past year' },
-  { value: '5+', label: 'Android major releases' },
-  { value: '3+', label: 'years shipping software' },
-]
+// Used only until the live count arrives, or if the stats endpoint is down.
+const FALLBACK_CONTRIBUTIONS = '292'
 
 const socials = [
   { label: 'GitHub', href: profile.github, icon: GitHubIcon },
@@ -24,6 +22,18 @@ const socials = [
 ]
 
 export function Hero() {
+  const { contributions } = useLiveStats()
+
+  const stats = [
+    {
+      value:
+        contributions === null ? FALLBACK_CONTRIBUTIONS : String(contributions),
+      label: 'contributions in the past year',
+    },
+    { value: '5+', label: 'Android major releases' },
+    { value: '3+', label: 'years shipping software' },
+  ]
+
   return (
     <section className="border-b border-stone-200 dark:border-stone-800">
       <div className="mx-auto max-w-5xl px-6 pb-16 pt-10 sm:pt-14">

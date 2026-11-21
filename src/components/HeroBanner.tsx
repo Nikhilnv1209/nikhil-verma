@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useTimeOfDay } from '../hooks/useTimeOfDay'
 import { Clock } from './Clock'
 import { Petals } from './Petals'
+import { Visits } from './Visits'
 
 export function HeroBanner() {
   const timeOfDay = useTimeOfDay()
@@ -37,9 +38,16 @@ export function HeroBanner() {
           aria-hidden="true"
         />
 
-        <div className="absolute bottom-2 right-3 flex items-center gap-2 rounded-md bg-black/30 px-2 py-1 font-mono text-xs tracking-[0.15em] text-stone-100 backdrop-blur-sm sm:bottom-3 sm:right-5 sm:text-sm">
-          <span className="size-1.5 rounded-full bg-emerald-400" aria-hidden="true" />
-          <Clock />
+        <div className="absolute bottom-2 right-3 flex items-center gap-2.5 rounded-md bg-black/30 px-2 py-1 font-mono text-xs text-stone-100 backdrop-blur-sm sm:bottom-3 sm:right-5 sm:text-sm">
+          <span className="flex items-center gap-2 tracking-[0.15em]">
+            <span
+              className="size-1.5 rounded-full bg-emerald-400"
+              aria-hidden="true"
+            />
+            <Clock />
+          </span>
+
+          <Visits />
         </div>
       </div>
     </div>
