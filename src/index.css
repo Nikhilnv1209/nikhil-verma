@@ -376,6 +376,38 @@ html.dark .btn-ghost:hover {
   background-color: rgba(58, 53, 43, 0.55);
 }
 
+/* Icon roll. Two stacked copies inside a window the size of one icon: on
+   hover the first exits upward while the second arrives from below, so the
+   change reads as a turn rather than a swap. */
+.roll {
+  position: relative;
+  display: inline-block;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.roll > svg {
+  display: block;
+  transition: transform 460ms var(--ease-out);
+}
+
+.roll > svg:last-child {
+  position: absolute;
+  top: 100%;
+  left: 0;
+}
+
+.btn:hover .roll > svg,
+.btn:focus-visible .roll > svg {
+  transform: translateY(-100%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .roll > svg {
+    transition: none;
+  }
+}
+
 /* In the skills grid the chip is the content, not metadata, so it gets a
    little more room to be read at a glance. */
 .tech-pill[data-size='md'] {

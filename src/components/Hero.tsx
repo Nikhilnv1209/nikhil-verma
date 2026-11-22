@@ -10,6 +10,7 @@ import {
 } from './Icons'
 import { Menu } from './Menu'
 import { Portrait } from './Portrait'
+import { RollingIcon } from './RollingIcon'
 import { StackIcons } from './StackIcons'
 import { ThemeToggle } from './ThemeToggle'
 
@@ -99,14 +100,14 @@ export function Hero() {
             href="#contact"
             className="btn btn-primary"
           >
-            <ChatIcon className="size-4" />
+            <RollingIcon icon={ChatIcon} />
             Let's talk
           </a>
           <a
             href={mailtoHref()}
             className="btn btn-ghost"
           >
-            <MailIcon className="size-4" />
+            <RollingIcon icon={MailIcon} />
             Email me
           </a>
         </div>

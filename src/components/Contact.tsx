@@ -9,6 +9,7 @@ import {
   LinkedInIcon,
   MailIcon,
 } from './Icons'
+import { RollingIcon } from './RollingIcon'
 import { Section } from './Section'
 
 const elsewhere = [
@@ -65,7 +66,7 @@ export function Contact() {
                 }}
                 className="btn btn-primary"
               >
-                <MailIcon className="size-4" />
+                <RollingIcon icon={MailIcon} />
                 Email me
               </button>
               <button
