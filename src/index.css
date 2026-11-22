@@ -314,6 +314,14 @@ html.dark .tech-pill {
     linear-gradient(165deg, #23201b, #12110d 62%, #0d0c0a);
 }
 
+/* In the skills grid the chip is the content, not metadata, so it gets a
+   little more room to be read at a glance. */
+.tech-pill[data-size='md'] {
+  border-radius: 8px;
+  padding: 0.3125rem 0.5625rem;
+  font-size: 12px;
+}
+
 /* The overflow count is a chip too, but it should recede. */
 .tech-pill[data-muted='true'] {
   background-color: transparent;

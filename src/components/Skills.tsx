@@ -1,4 +1,5 @@
 import { skillGroups } from '../data/portfolio'
+import { Reveal } from './Reveal'
 import { Section } from './Section'
 
 export function Skills() {
@@ -8,21 +9,36 @@ export function Skills() {
         What I work with
       </h2>
 
-      <dl className="mt-8 max-w-2xl divide-y divide-stone-200 border-t border-stone-200 dark:divide-stone-800 dark:border-stone-800">
-        {skillGroups.map((group) => (
-          <div
+      <div className="mt-8 grid gap-x-12 gap-y-6 sm:mt-9 sm:grid-cols-2 sm:gap-y-8">
+        {skillGroups.map((group, index) => (
+          <Reveal
             key={group.title}
-            className="grid gap-1 py-4 sm:grid-cols-[9rem_1fr] sm:gap-8"
+            // Two columns read left to right, so the stagger follows the row.
+            delay={(index % 2) * 70}
+            className="border-t border-stone-200 pt-3.5 dark:border-stone-800"
           >
-            <dt className="text-sm font-medium text-stone-900 dark:text-stone-200">
-              {group.title}
-            </dt>
-            <dd className="text-sm leading-6 text-stone-600 dark:text-stone-400">
-              {group.skills.join(', ')}
-            </dd>
-          </div>
+            <div className="flex items-baseline justify-between gap-3">
+              <h3 className="text-sm font-semibold text-stone-900 dark:text-stone-100">
+                {group.title}
+              </h3>
+              <span
+                aria-hidden="true"
+                className="font-mono text-[10px] tabular-nums text-stone-400 dark:text-stone-500"
+              >
+                {String(group.skills.length).padStart(2, '0')}
+              </span>
+            </div>
+
+            <ul className="mt-3 flex flex-wrap gap-1.5">
+              {group.skills.map((skill) => (
+                <li key={skill} data-size="md" className="tech-pill">
+                  {skill}
+                </li>
+              ))}
+            </ul>
+          </Reveal>
         ))}
-      </dl>
+      </div>
     </Section>
   )
 }
