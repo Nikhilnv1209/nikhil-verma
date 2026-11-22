@@ -376,9 +376,11 @@ html.dark .btn-ghost:hover {
   background-color: rgba(58, 53, 43, 0.55);
 }
 
-/* Icon roll. Two stacked copies inside a window the size of one icon: on
-   hover the first exits upward while the second arrives from below, so the
-   change reads as a turn rather than a swap. */
+/* Icon roll. Two stacked copies inside a window the size of one icon. The
+   transition is declared on the hovered state only: entering animates, leaving
+   resolves instantly to the copy it began on. Both copies are the same icon, so
+   that instant resolve is pixel-identical and never reads as a jump — and the
+   roll can only ever run one way. */
 .roll {
   position: relative;
   display: inline-block;
@@ -388,7 +390,6 @@ html.dark .btn-ghost:hover {
 
 .roll > svg {
   display: block;
-  transition: transform 460ms var(--ease-out);
 }
 
 .roll > svg:last-child {
@@ -399,11 +400,13 @@ html.dark .btn-ghost:hover {
 
 .btn:hover .roll > svg,
 .btn:focus-visible .roll > svg {
+  transition: transform 460ms var(--ease-out);
   transform: translateY(-100%);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .roll > svg {
+  .btn:hover .roll > svg,
+  .btn:focus-visible .roll > svg {
     transition: none;
   }
 }
