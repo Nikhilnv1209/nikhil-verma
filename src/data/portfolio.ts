@@ -52,7 +52,6 @@ export const profile = {
   tagline:
     'I build native AI interfaces for Linux, ship Android releases on Chromium, and develop full-stack tools — from architecture to rollout.',
   location: 'Noida, India',
-  email: 'nikhilverma5000.nv@gmail.com',
   github: 'https://github.com/Nikhilnv1209',
   linkedin: 'https://www.linkedin.com/in/nikhil-verma-nv1209/',
 }

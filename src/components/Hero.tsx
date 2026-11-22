@@ -1,4 +1,5 @@
 import { profile } from '../data/portfolio'
+import { mailtoHref } from '../lib/contact'
 import { useLiveStats } from '../lib/use-live-stats'
 import {
   ChatIcon,
@@ -96,14 +97,14 @@ export function Hero() {
         <div className="mt-7 flex flex-wrap gap-3">
           <a
             href="#contact"
-            className="inline-flex items-center gap-2 rounded-xl bg-stone-900 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-stone-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-600 dark:bg-white dark:text-stone-950 dark:hover:bg-stone-200"
+            className="btn btn-primary"
           >
             <ChatIcon className="size-4" />
             Let's talk
           </a>
           <a
-            href={`mailto:${profile.email}`}
-            className="inline-flex items-center gap-2 rounded-xl border border-stone-300 px-4 py-2.5 text-sm font-semibold text-stone-700 transition hover:border-stone-400 hover:bg-stone-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-600 dark:border-stone-700 dark:text-stone-200 dark:hover:bg-stone-800/60"
+            href={mailtoHref()}
+            className="btn btn-ghost"
           >
             <MailIcon className="size-4" />
             Email me

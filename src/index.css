@@ -314,6 +314,68 @@ html.dark .tech-pill {
     linear-gradient(165deg, #23201b, #12110d 62%, #0d0c0a);
 }
 
+/* Actions share one box so a page reads as a system: a solid primary and a
+   hairline secondary, never two different heights. */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  padding: 0.625rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.2;
+  transition:
+    background-color 200ms var(--ease-out),
+    border-color 200ms var(--ease-out),
+    color 200ms var(--ease-out);
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--color-accent-600);
+  outline-offset: 2px;
+}
+
+.btn-primary {
+  background-color: var(--color-stone-900);
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background-color: var(--color-stone-700);
+}
+
+html.dark .btn-primary {
+  background-color: #fff;
+  color: var(--color-stone-950);
+}
+
+html.dark .btn-primary:hover {
+  background-color: var(--color-stone-200);
+}
+
+.btn-ghost {
+  border-color: var(--color-stone-300);
+  color: var(--color-stone-700);
+}
+
+.btn-ghost:hover {
+  border-color: var(--color-stone-400);
+  background-color: var(--color-stone-100);
+}
+
+html.dark .btn-ghost {
+  border-color: var(--color-stone-700);
+  color: var(--color-stone-200);
+}
+
+html.dark .btn-ghost:hover {
+  border-color: var(--color-stone-600);
+  background-color: rgba(58, 53, 43, 0.55);
+}
+
 /* In the skills grid the chip is the content, not metadata, so it gets a
    little more room to be read at a glance. */
 .tech-pill[data-size='md'] {

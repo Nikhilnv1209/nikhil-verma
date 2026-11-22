@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { navItems, profile } from '../data/portfolio'
+import { mailtoHref } from '../lib/contact'
 import { Link } from '../lib/router'
 import {
   ArrowUpRightIcon,
@@ -124,7 +125,7 @@ export function Menu() {
               <LinkedInIcon className="size-4" />
             </a>
             <a
-              href={`mailto:${profile.email}`}
+              href={mailtoHref()}
               aria-label="Email Nikhil"
               className="grid size-8 place-items-center rounded-lg text-stone-500 transition hover:bg-stone-100 hover:text-stone-900 dark:hover:bg-stone-800 dark:hover:text-white"
             >
