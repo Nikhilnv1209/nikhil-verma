@@ -157,9 +157,9 @@ export const projects: Project[] = [
     image: '/projects/expensetracker-home.webp',
     phones: [
       '/projects/expensetracker-home.webp',
-      '/projects/expensetracker-settings.webp',
+      '/projects/expensetracker-agent.webp',
     ],
-    mediaAspect: 620 / 1306,
+    mediaAspect: 390 / 884,
     tech: [
       'Kotlin',
       'Jetpack Compose',
