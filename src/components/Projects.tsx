@@ -1,8 +1,26 @@
+import type { PointerEvent as ReactPointerEvent } from 'react'
 import { projects } from '../data/portfolio'
 import { ArrowUpRightIcon, GitHubIcon } from './Icons'
 import { Link } from '../lib/router'
 import { Reveal } from './Reveal'
 import { Section } from './Section'
+
+/* The cursor position goes straight into two custom properties the scene reads,
+   so moving the pointer never re-renders a card. Removing them snaps back to
+   the centre in `.scene`, which the layer transitions through like any other
+   move. */
+function trackScene(event: ReactPointerEvent<HTMLAnchorElement>) {
+  if (event.pointerType !== 'mouse') return
+  const rect = event.currentTarget.getBoundingClientRect()
+  const { style } = event.currentTarget
+  style.setProperty('--mx', ((event.clientX - rect.left) / rect.width).toFixed(3))
+  style.setProperty('--my', ((event.clientY - rect.top) / rect.height).toFixed(3))
+}
+
+function resetScene(event: ReactPointerEvent<HTMLAnchorElement>) {
+  event.currentTarget.style.removeProperty('--mx')
+  event.currentTarget.style.removeProperty('--my')
+}
 
 export function Projects() {
   return (
@@ -23,37 +41,53 @@ export function Projects() {
               <Link
                 to={`/projects/${project.slug}`}
                 aria-label={`View ${project.title}`}
-                className="media-stage relative block aspect-[16/10] w-full shrink-0 overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-600"
+                onPointerMove={trackScene}
+                onPointerLeave={resetScene}
+                className="media-stage scene relative block aspect-[16/10] w-full shrink-0 overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-600"
               >
-                {project.phones ? (
-                  <div className="absolute inset-0 flex items-center justify-center p-4 sm:p-6">
-                    {project.phones.map((source, phoneIndex) => (
-                      <div
-                        key={source}
-                        style={{ aspectRatio: project.mediaAspect }}
-                        className={`shrink-0 overflow-hidden rounded-[14px] border border-white/10 shadow-[0_22px_60px_-16px_rgba(0,0,0,0.85)] transition-transform duration-500 ease-out ${
-                          phoneIndex === 0
-                            ? 'relative z-10 h-[94%] -translate-y-1 -rotate-3 group-hover:-translate-y-2.5'
-                            : '-ml-2 h-[84%] translate-y-2 rotate-1 group-hover:translate-y-1'
-                        }`}
-                      >
-                        <img
-                          src={source}
-                          alt={`${project.title} screen ${phoneIndex + 1}`}
-                          loading="lazy"
-                          className="size-full object-cover"
-                        />
-                      </div>
-                    ))}
-                  </div>
-                ) : (
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    loading="lazy"
-                    className="absolute inset-0 size-full object-contain transition-transform duration-500 ease-out group-hover:scale-[1.015]"
-                  />
-                )}
+                <div className="scene-layer absolute inset-0">
+                  {project.phones ? (
+                    <div className="flex size-full items-center justify-center p-4 sm:p-6">
+                      {project.phones.map((source, phoneIndex) => (
+                        <div
+                          key={source}
+                          style={{ aspectRatio: project.mediaAspect }}
+                          className={`shrink-0 overflow-hidden rounded-[14px] border border-white/10 shadow-[0_22px_60px_-16px_rgba(0,0,0,0.85)] ${
+                            phoneIndex === 0
+                              ? 'relative z-10 h-[94%] -translate-y-1 -rotate-3'
+                              : '-ml-2 h-[84%] translate-y-2 rotate-1'
+                          }`}
+                        >
+                          <img
+                            src={source}
+                            alt={`${project.title} screen ${phoneIndex + 1}`}
+                            loading="lazy"
+                            className="size-full object-cover"
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      loading="lazy"
+                      className="size-full object-contain"
+                    />
+                  )}
+                </div>
+
+                <span
+                  aria-hidden="true"
+                  className="scene-glow pointer-events-none absolute inset-0"
+                />
+
+                {/* A hairline of accent along the bottom edge: the one cue that
+                    says the picture is a door. */}
+                <span
+                  aria-hidden="true"
+                  className="pointer-events-none absolute inset-x-0 bottom-0 h-px origin-left scale-x-0 bg-accent-400/80 transition-transform duration-500 ease-out group-hover:scale-x-100 motion-reduce:transition-none"
+                />
               </Link>
 
               <div className="flex flex-1 flex-col p-4 sm:p-5 md:p-6">

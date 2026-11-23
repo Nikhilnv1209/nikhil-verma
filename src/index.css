@@ -314,6 +314,45 @@ html.dark .tech-pill {
     linear-gradient(165deg, #23201b, #12110d 62%, #0d0c0a);
 }
 
+/* Hover scene. Instead of the picture growing in place, it eases a few pixels
+   against the pointer while a pool of light travels with the cursor — the frame
+   behaves like a lit window you are moving across, not a thumbnail zooming. The
+   cursor position lives in two custom properties, written on pointer move and
+   left at centre, so the reset is the same transition in reverse. */
+.scene {
+  --mx: 0.5;
+  --my: 0.5;
+}
+
+.scene-layer {
+  transition: transform 620ms var(--ease-out);
+}
+
+.scene-glow {
+  background-image: radial-gradient(
+    18rem 13rem at calc(var(--mx) * 100%) calc(var(--my) * 100%),
+    rgba(255, 255, 255, 0.12),
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity 380ms var(--ease-out);
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .group:hover .scene-layer {
+    transform: scale(1.035)
+      translate3d(
+        calc((0.5 - var(--mx)) * 16px),
+        calc((0.5 - var(--my)) * 11px),
+        0
+      );
+  }
+
+  .group:hover .scene-glow {
+    opacity: 1;
+  }
+}
+
 /* Actions share one box so a page reads as a system: a solid primary and a
    hairline secondary, never two different heights. */
 .btn {
